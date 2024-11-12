@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+
+<AnchorPane prefHeight="600" prefWidth="400" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotel.controller.ReservasLayoutController">
+   <children>
+   
+       <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="718.0" spacing="10">
+      <children>
+      
+              <!-- Datos del cliente -->
+              <Label style="-fx-font-weight: bold;" text="Datos del cliente" />
+      
+              <!-- Datos de la reserva -->
+              <Label style="-fx-font-weight: bold;" text="Datos de la reserva" />
+              <GridPane hgap="10" vgap="10">
+                 <children>
+                     <Label text="Fecha de llegada:" />
+                     <DatePicker fx:id="fechaLlegadaPicker" GridPane.columnIndex="1" />
+         
+                     <Label text="Fecha de salida:" GridPane.columnIndex="2" />
+                     <DatePicker fx:id="fechaSalidaPicker" GridPane.columnIndex="3" />
+         
+                     <Label text="Número de habitaciones:" GridPane.rowIndex="1" />
+         
+                     <Label text="Tipo de habitación:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+         
+                     <CheckBox fx:id="fumadorCheckBox" text="Fumador" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <ComboBox prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                 </children>
+               <columnConstraints>
+                  <ColumnConstraints maxWidth="148.0" minWidth="130.0" prefWidth="134.0" />
+                  <ColumnConstraints maxWidth="213.0" minWidth="195.0" prefWidth="209.0" />
+                  <ColumnConstraints />
+                  <ColumnConstraints />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+               </rowConstraints>
+              </GridPane>
+      
+              <!-- Régimen de alojamiento -->
+              <Label style="-fx-font-weight: bold;" text="Régimen" />
+              <VBox spacing="5">
+                 <children>
+                     <RadioButton fx:id="alojamientoDesayuno" text="Alojamiento y desayuno" />
+                     <RadioButton fx:id="mediaPension" text="Media pensión" />
+                     <RadioButton fx:id="pensionCompleta" text="Pensión completa" />
+                 </children>
+              </VBox>
+      
+              <!-- Mensaje de advertencia -->
+              <Label style="-fx-font-style: italic;" text="En virtud de la ley de sanidad se informa a los clientes de que solo podrán fumar en las habitaciones reservadas para tal fin." wrapText="true" />
+      
+              <!-- Botones -->
+              <HBox alignment="CENTER" spacing="10">
+         <children>
+                     <Button fx:id="limpiarButton" text="Limpiar" />
+                     <Button fx:id="aceptarButton" text="Aceptar" />
+                     <Button fx:id="cancelarButton" text="Cancelar" />
+         </children>
+              </HBox>
+      </children>
+   
+       </VBox>
+   </children>
+</AnchorPane>
