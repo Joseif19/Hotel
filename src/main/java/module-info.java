@@ -12,6 +12,7 @@ module com.example.hotel {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires AccesoBBDDMoneda;
+    requires mysql.connector.java;
 
     opens com.example.hotel to javafx.fxml;
     exports com.example.hotel.controller;
