@@ -10,14 +10,14 @@
 
 <AnchorPane prefHeight="595.0" prefWidth="906.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotel.controller.PersonasLayoutController">
    <children>
-      <SplitPane dividerPositions="0.479933110367893" layoutX="168.0" layoutY="84.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: green;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane dividerPositions="0.4922566371681416" layoutX="168.0" layoutY="84.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: green;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="215.0">
                <children>
-                  <TableView layoutX="81.0" layoutY="41.0" prefHeight="593.0" prefWidth="430.0" style="-fx-background-color: #96f896;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tablaPersonas" layoutX="81.0" layoutY="41.0" prefHeight="593.0" prefWidth="430.0" style="-fx-background-color: #96f896;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn prefWidth="181.0" text="Nombre" style="-fx-background-color: #96f896;"/>
-                      <TableColumn prefWidth="246.0" text="Apellidos" style="-fx-background-color: #96f896;"/>
+                      <TableColumn fx:id="firstNameColumn" prefWidth="181.0" style="-fx-background-color: #96f896;" text="Nombre" />
+                      <TableColumn fx:id="lastNameColumn" prefWidth="246.0" style="-fx-background-color: #96f896;" text="Apellidos" />
                     </columns>
                   </TableView>
                </children>
@@ -71,7 +71,7 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="89.0" style="-fx-background-color: #4b8f4b;" text="Eliminar" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#handleDeletePerson" prefHeight="28.0" prefWidth="89.0" style="-fx-background-color: #4b8f4b;" text="Eliminar" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font></Button>

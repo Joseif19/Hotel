@@ -1,12 +1,11 @@
 package com.example.hotel;
 
+import com.example.hotel.controller.PersonEditDialogController;
 import com.example.hotel.controller.PersonasLayoutController;
 import javafx.application.Application;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -22,8 +21,8 @@ public class MainApp extends Application {
     private ObservableList<Persona> personas = FXCollections.observableArrayList();
 
     public MainApp() {
-        personas.add(new Persona("20503981X", "José María", "Iglesias Fernández"));
-        personas.add(new Persona("12345678H", "Flavien Enzo", "Thiedort Boyomo"));
+        personas.add(new Persona("20503981X", "José María", "Iglesias Fernández", "Calle Inventada", "Sevilla", "Sevilla"));
+
     }
 
     public ObservableList<Persona> getPersonas() {
@@ -55,6 +54,19 @@ public class MainApp extends Application {
         }catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    public void showPersonEditDialog(Persona tempPersona) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainApp.class.getResource("/com/example/hotel/vista/PersonEditDialogVista.fxml"));
+        AnchorPane personEditDialog = (AnchorPane) loader.load();
+
+        PersonEditDialogController controller = loader.getController();
+        controller.setMainApp(this);
+
+        Scene escena = new Scene(personEditDialog);
+        primaryStage.setScene(escena);
+        primaryStage.show();
     }
 
     public static void main(String[] args) {

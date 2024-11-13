@@ -12,17 +12,17 @@ public class Persona {
     private final StringProperty provincia;
 
     public Persona() {
-        this(null, null, null);
+        this(null, null, null, null, null, null);
     }
 
-    public Persona(String dni, String nombre, String apellidos) {
+    public Persona(String dni, String nombre, String apellidos, String direccion, String localidad, String provincia) {
         this.dni = new SimpleStringProperty(dni);
         this.nombre = new SimpleStringProperty(nombre);
         this.apellidos = new SimpleStringProperty(apellidos);
 
-        this.direccion = new SimpleStringProperty("--Dirección--");
-        this.localidad = new SimpleStringProperty("--Localidad--");
-        this.provincia = new SimpleStringProperty("--Provincia--");
+        this.direccion = new SimpleStringProperty(direccion);
+        this.localidad = new SimpleStringProperty(localidad);
+        this.provincia = new SimpleStringProperty(provincia);
     }
 
     public String getDni() {

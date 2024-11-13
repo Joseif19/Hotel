@@ -1,6 +1,7 @@
 package com.example.hotel.controller;
 
 import com.example.hotel.MainApp;
+import javafx.scene.control.Alert;
 import model.Persona;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -10,24 +11,24 @@ import javafx.scene.control.TableView;
 
 public class PersonasLayoutController {
     @FXML
-    private TableView<Persona> personTable;
+    private TableView<Persona> tablaPersonas;
     @FXML
     private TableColumn<Persona, String> firstNameColumn;
     @FXML
     private TableColumn<Persona, String> lastNameColumn;
 
     @FXML
-    private Label dniLabel;
+    private Label dni;
     @FXML
-    private Label nombreLabel;
+    private Label nombre;
     @FXML
-    private Label apellidosLabel;
+    private Label apellidos;
     @FXML
-    private Label direccionLabel;
+    private Label direccion;
     @FXML
-    private Label localidadLabel;
+    private Label localidad;
     @FXML
-    private Label provinciaLabel;
+    private Label provincia;
 
     private MainApp mainApp;
 
@@ -40,34 +41,34 @@ public class PersonasLayoutController {
 
         showPersonDetails(null);
 
-        personTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showPersonDetails(newValue));
+        tablaPersonas.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showPersonDetails(newValue));
     }
-//
-//
-// @FXML
-//    private void handleNewPerson() {
-//        Persona tempPerson = new Persona();
-//        boolean okClicked = mainApp.showPersonEditDialog(tempPerson);
-//        if (okClicked) {
-//            mainApp.getPersonData().add(tempPerson);
-//        }
-//    }
 
-//    @FXML
-//    private void handleDeletePerson() {
-//        int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
-//        if (selectedIndex >= 0) {
-//            personTable.getItems().remove(selectedIndex);
-//        } else {
-//            // Nada seleccionado.
-//            Alert alert = new Alert(Alert.AlertType.WARNING);
-//            alert.setTitle("Seleciona algo");
-//            alert.setHeaderText("Ninguna persona selecionada");
-//            alert.setContentText("Elige una persona de la tabla.");
-//
-//            alert.showAndWait();
-//        }
-//    }
+
+    @FXML
+    private void handleNewPerson() {
+        Persona tempPersona = new Persona();
+        boolean okClicked = mainApp.showPersonEditDialog(tempPersona);
+        if (okClicked) {
+            mainApp.getPersonas().add(tempPersona);
+        }
+    }
+
+    @FXML
+    private void handleDeletePerson() {
+        int selectedIndex = tablaPersonas.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            tablaPersonas.getItems().remove(selectedIndex);
+        } else {
+            // Nada seleccionado
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Seleciona algo");
+            alert.setHeaderText("Ninguna persona selecionada");
+            alert.setContentText("Elige una persona de la tabla.");
+
+            alert.showAndWait();
+        }
+    }
 //
 //
 //    @FXML
@@ -94,25 +95,25 @@ public class PersonasLayoutController {
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
 
-        personTable.setItems(mainApp.getPersonas());
+        tablaPersonas.setItems(mainApp.getPersonas());
     }
 
     private void showPersonDetails(Persona person) {
         if (person != null) {
-            dniLabel.setText(person.getDni());
-            nombreLabel.setText(person.getNombre());
-            apellidosLabel.setText(person.getApellidos());
-            direccionLabel.setText(person.getDireccion());
-            localidadLabel.setText(person.getLocalidad());
-            provinciaLabel.setText(person.getProvincia());
+            dni.setText(person.getDni());
+            nombre.setText(person.getNombre());
+            apellidos.setText(person.getApellidos());
+            direccion.setText(person.getDireccion());
+            localidad.setText(person.getLocalidad());
+            provincia.setText(person.getProvincia());
 
         } else {
-            dniLabel.setText("");
-            nombreLabel.setText("");
-            apellidosLabel.setText("");
-            direccionLabel.setText("");
-            localidadLabel.setText("");
-            provinciaLabel.setText("");
+            dni.setText("");
+            nombre.setText("");
+            apellidos.setText("");
+            direccion.setText("");
+            localidad.setText("");
+            provincia.setText("");
         }
     }
 }
