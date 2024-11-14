@@ -45,14 +45,14 @@ public class PersonasLayoutController {
     }
 
 
-    @FXML
-    private void handleNewPerson() {
-        Persona tempPersona = new Persona();
-        boolean okClicked = mainApp.showPersonEditDialog(tempPersona);
-        if (okClicked) {
-            mainApp.getPersonas().add(tempPersona);
-        }
-    }
+//    @FXML
+//    private void handleNewPerson() {
+//        Persona tempPersona = new Persona();
+//        boolean okClicked = mainApp.showPersonEditDialog(tempPersona);
+//        if (okClicked) {
+//            mainApp.getPersonas().add(tempPersona);
+//        }
+//    }
 
     @FXML
     private void handleDeletePerson() {
@@ -69,11 +69,11 @@ public class PersonasLayoutController {
             alert.showAndWait();
         }
     }
-//
-//
+
+
 //    @FXML
 //    private void handleEditPerson() {
-//        Persona selectedPerson = personTable.getSelectionModel().getSelectedItem();
+//        Persona selectedPerson = tablaPersonas.getSelectionModel().getSelectedItem();
 //        if (selectedPerson != null) {
 //            boolean okClicked = mainApp.showPersonEditDialog(selectedPerson);
 //            if (okClicked) {

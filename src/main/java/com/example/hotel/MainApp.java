@@ -22,7 +22,7 @@ public class MainApp extends Application {
 
     public MainApp() {
         personas.add(new Persona("20503981X", "José María", "Iglesias Fernández", "Calle Inventada", "Sevilla", "Sevilla"));
-
+        personas.add(new Persona("12345678T", "Enzo", "Boyomo", "Flow Street", "El bronx", "Los Santos"));
     }
 
     public ObservableList<Persona> getPersonas() {

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.hotel.controller.PersonEditDialogController" prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #6DA095FF;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotel.controller.PersonEditDialogController">
     <children>
         <GridPane layoutX="39.0" layoutY="21.0" prefHeight="204.0" prefWidth="381.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
             <columnConstraints>
@@ -39,8 +41,14 @@
         </GridPane>
         <HBox layoutX="362.0" layoutY="349.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
             <children>
-                <Button layoutX="362.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleOk" text="Aceptar" />
-                <Button layoutX="447.0" layoutY="349.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancelar" />
+                <Button mnemonicParsing="false" onAction="handleOk" prefHeight="28.0" prefWidth="73.0" style="-fx-background-color: #E1DF66;" text="Aceptar" textFill="#285d66">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font></Button>
+                <Button mnemonicParsing="false" onAction="handleCancel" prefHeight="28.0" prefWidth="73.0" style="-fx-background-color: #E1DF66;" text="Cancelar" textFill="#285d66">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font></Button>
             </children>
         </HBox>
     </children>
