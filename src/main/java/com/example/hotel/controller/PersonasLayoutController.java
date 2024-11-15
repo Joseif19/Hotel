@@ -8,6 +8,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
+import java.io.IOException;
+
 
 public class PersonasLayoutController {
     @FXML
@@ -46,7 +48,7 @@ public class PersonasLayoutController {
 
 
 //    @FXML
-//    private void handleNewPerson() {
+//    private void handleNewPerson() throws IOException {
 //        Persona tempPersona = new Persona();
 //        boolean okClicked = mainApp.showPersonEditDialog(tempPersona);
 //        if (okClicked) {

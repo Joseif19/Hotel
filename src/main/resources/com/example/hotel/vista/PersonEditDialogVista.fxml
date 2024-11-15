@@ -24,12 +24,30 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label text="Nombre" />
-                <Label text="Apellido" GridPane.rowIndex="1" />
-                <Label text="Calle" GridPane.rowIndex="2" />
-                <Label text="Ciudad" GridPane.rowIndex="3" />
-                <Label text="Codigo Postal" GridPane.rowIndex="4" />
-                <Label text="Fecha nacimiento" GridPane.rowIndex="5" />
+                <Label text="Nombre" textFill="#285d66">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+                <Label text="Apellido" textFill="#285d66" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+                <Label text="Calle" textFill="#285d66" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+                <Label text="Ciudad" textFill="#285d66" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+                <Label text="Codigo Postal" textFill="#285d66" GridPane.rowIndex="4">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+                <Label text="Fecha nacimiento" textFill="#285d66" GridPane.rowIndex="5">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
                 <TextField fx:id="firstNameField" GridPane.columnIndex="1" />
                 <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <TextField fx:id="streetField" GridPane.columnIndex="1" GridPane.rowIndex="2" />

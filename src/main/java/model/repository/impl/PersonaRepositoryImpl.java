@@ -45,7 +45,7 @@ public class PersonaRepositoryImpl implements PersonaRepository {
             this.conexion.desconectarBD(conn);
             return this.personas;
         } catch (SQLException var6) {
-            throw new ExcepcionPersona("No se ha podido realizar la operación");
+            throw new ExcepcionPersona("No se ha podido realizar la operación.");
         }
     }
 
@@ -59,7 +59,7 @@ public class PersonaRepositoryImpl implements PersonaRepository {
             this.stmt.close();
             this.conexion.desconectarBD(conn);
         } catch (SQLException var3) {
-            throw new ExcepcionPersona("No se ha podido realizar la operación");
+            throw new ExcepcionPersona("No se ha podido realizar la operación.");
         }
     }
 
@@ -73,7 +73,7 @@ public class PersonaRepositoryImpl implements PersonaRepository {
             comando.executeUpdate(sql);
             this.conexion.desconectarBD(conn);
         } catch (SQLException var5) {
-            throw new ExcepcionPersona("No se ha podido realizar la eliminación");
+            throw new ExcepcionPersona("No se ha podido realizar la eliminación.");
         }
     }
 
@@ -82,10 +82,10 @@ public class PersonaRepositoryImpl implements PersonaRepository {
         try {
             Connection conn = this.conexion.conectarBD();
             this.stmt = conn.createStatement();
-            String sql = String.format("UPDATE persona SET nombre = '%s', apellidos = '%s', direccion = '%s', localidad = '%s', provincia = '%s' WHERE dni = %d", personaVO.getNombre(), personaVO.getApellidos(), personaVO.getDireccion(), personaVO.getLocalidad(), personaVO.getProvincia(), personaVO.getDni());
+            String sql = String.format("UPDATE persona SET nombre = '%s', apellidos = '%s', direccion = '%s', localidad = '%s', provincia = '%s', dni = '%s' WHERE dni = %d", personaVO.getNombre(), personaVO.getApellidos(), personaVO.getDireccion(), personaVO.getLocalidad(), personaVO.getProvincia(), personaVO.getDni());
             this.stmt.executeUpdate(sql);
         } catch (Exception var4) {
-            throw new ExcepcionPersona("No se ha podido realizar la edición");
+            throw new ExcepcionPersona("No se ha podido realizar la edición.");
         }
     }
 
@@ -97,12 +97,13 @@ public class PersonaRepositoryImpl implements PersonaRepository {
             Connection conn = this.conexion.conectarBD();
             Statement comando = conn.createStatement();
 
-            for(ResultSet registro = comando.executeQuery("SELECT dni FROM persona ORDER BY dni DESC LIMIT 1"); registro.next(); lastDni = registro.getString("dni")) {
+            for(ResultSet registro = comando.executeQuery("SELECT dni FROM persona ORDER BY dni DESC LIMIT 1"); registro.next();
+                lastDni = registro.getString("dni")) {
             }
 
             return lastDni;
         } catch (SQLException var5) {
-            throw new ExcepcionPersona("No se ha podido realizar la busqueda del ID");
+            throw new ExcepcionPersona("No se ha podido realizar la busqueda del DNI.");
         }
     }
 
