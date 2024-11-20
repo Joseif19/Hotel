@@ -24,46 +24,47 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label text="Nombre" textFill="#285d66">
+                <Label text="DNI" textFill="#285d66">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Label>
-                <Label text="Apellido" textFill="#285d66" GridPane.rowIndex="1">
+                <Label text="Nombre" textFill="#285d66" GridPane.rowIndex="1">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Label>
-                <Label text="Calle" textFill="#285d66" GridPane.rowIndex="2">
+                <Label text="Apellidos" textFill="#285d66" GridPane.rowIndex="2">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Label>
-                <Label text="Ciudad" textFill="#285d66" GridPane.rowIndex="3">
+                <Label text="Dirección" textFill="#285d66" GridPane.rowIndex="3">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Label>
-                <Label text="Codigo Postal" textFill="#285d66" GridPane.rowIndex="4">
+                <Label text="Localidad" textFill="#285d66" GridPane.rowIndex="4">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Label>
-                <Label text="Fecha nacimiento" textFill="#285d66" GridPane.rowIndex="5">
+                <Label text="Provincia" textFill="#285d66" GridPane.rowIndex="5">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Label>
-                <TextField fx:id="firstNameField" GridPane.columnIndex="1" />
-                <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TextField fx:id="streetField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="dniField" GridPane.columnIndex="1" />
+                <TextField fx:id="nombreField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="apellidosField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <TextField fx:id="cityField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <TextField fx:id="postalCodeField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <TextField fx:id="birthdayField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <TextField fx:id="direccionField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField fx:id="localidadField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <TextField fx:id="provinciaField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             </children>
         </GridPane>
         <HBox layoutX="362.0" layoutY="349.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
             <children>
-                <Button mnemonicParsing="false" onAction="handleOk" prefHeight="28.0" prefWidth="73.0" style="-fx-background-color: #E1DF66;" text="Aceptar" textFill="#285d66">
+                <Button mnemonicParsing="false" onAction="#handleOk" prefHeight="28.0" prefWidth="73.0" style="-fx-background-color: #E1DF66;" text="Aceptar" textFill="#285d66">
                     <font>
                         <Font name="System Bold" size="13.0" />
-                    </font></Button>
-                <Button mnemonicParsing="false" onAction="handleCancel" prefHeight="28.0" prefWidth="73.0" style="-fx-background-color: #E1DF66;" text="Cancelar" textFill="#285d66">
+                    </font>
+            </Button>
+                <Button mnemonicParsing="false" onAction="#handleCancel" prefHeight="28.0" prefWidth="97.0" style="-fx-background-color: #E1DF66;" text="Cancelar" textFill="#285d66">
                     <font>
                         <Font name="System Bold" size="13.0" />
                     </font></Button>

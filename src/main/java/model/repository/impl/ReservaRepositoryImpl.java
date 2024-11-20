@@ -44,7 +44,6 @@ public class ReservaRepositoryImpl implements ReservaRepository {
                 this.reserva.setId_reserva(id_reserva);
                 this.reservas.add(this.reserva);
             }
-
             this.conexion.desconectarBD(conn);
             return this.reservas;
         } catch (SQLException var6) {

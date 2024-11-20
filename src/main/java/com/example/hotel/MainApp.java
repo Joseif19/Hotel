@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.Persona;
+import javafx.scene.control.Alert;
 
 import java.io.IOException;
 
@@ -21,8 +22,7 @@ public class MainApp extends Application {
     private ObservableList<Persona> personas = FXCollections.observableArrayList();
 
     public MainApp() {
-        personas.add(new Persona("20503981X", "José María", "Iglesias Fernández", "Calle Inventada", "Sevilla", "Sevilla"));
-        personas.add(new Persona("12345678T", "Enzo", "Boyomo", "Flow Street", "El bronx", "Los Santos"));
+
     }
 
     public ObservableList<Persona> getPersonas() {
@@ -56,17 +56,36 @@ public class MainApp extends Application {
         }
     }
 
-    public void showPersonEditDialog(Persona tempPersona) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainApp.class.getResource("/com/example/hotel/vista/PersonEditDialogVista.fxml"));
-        AnchorPane personEditDialog = (AnchorPane) loader.load();
+    public boolean showPersonEditDialog(Persona persona) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/com/example/hotel/vista/PersonEditDialogVista.fxml"));
 
-        PersonEditDialogController controller = loader.getController();
-        controller.setMainApp(this);
+            AnchorPane page = (AnchorPane) loader.load();
 
-        Scene escena = new Scene(personEditDialog);
-        primaryStage.setScene(escena);
-        primaryStage.show();
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Editar Persona");
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            PersonEditDialogController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setPerson(persona);
+
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No se pudo cargar el diálogo");
+            alert.setContentText("Ha ocurrido un error al cargar el diálogo.");
+
+            alert.showAndWait();
+
+            return false;
+        }
     }
 
     public static void main(String[] args) {

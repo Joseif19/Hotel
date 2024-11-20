@@ -1,19 +1,15 @@
 package model.repository.impl;
 
-import Modelo.repository.impl.ConexionJDBC;
 import model.ExcepcionPersona;
 import model.PersonaVO;
 import model.repository.PersonaRepository;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class PersonaRepositoryImpl implements PersonaRepository {
 
-    private final ConexionJDBC conexion = new ConexionJDBC();
+    private final model.repository.impl.ConexionJDBC conexion = new ConexionJDBC();
     private Statement stmt;
     private String query;
     private ArrayList<PersonaVO> personas;
@@ -24,41 +20,48 @@ public class PersonaRepositoryImpl implements PersonaRepository {
 
     //acabado
     public ArrayList<PersonaVO> ObtenerListaPersonas() throws ExcepcionPersona {
-        try {
-            Connection conn = this.conexion.conectarBD();
-            this.personas = new ArrayList();
-            this.stmt = conn.createStatement();
-            this.query = "SELECT * FROM persona";
-            ResultSet rs = this.stmt.executeQuery(this.query);
+        ArrayList<PersonaVO> personas = new ArrayList<>();
+        String query = "SELECT * FROM persona";
 
-            while(rs.next()) {
+        try (Connection conn = this.conexion.conectarBD();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
                 String dni = rs.getString("dni");
                 String nombre = rs.getString("nombre");
                 String apellidos = rs.getString("apellidos");
                 String direccion = rs.getString("direccion");
                 String localidad = rs.getString("localidad");
                 String provincia = rs.getString("provincia");
-                this.persona = new PersonaVO(nombre, apellidos, direccion, localidad, provincia);
-                this.persona.setDni(dni);
-                this.personas.add(this.persona);
+
+                PersonaVO persona = new PersonaVO(nombre, apellidos, direccion, localidad, provincia);
+                persona.setDni(dni);
+                personas.add(persona);
             }
-            this.conexion.desconectarBD(conn);
-            return this.personas;
-        } catch (SQLException var6) {
+        } catch (SQLException e) {
             throw new ExcepcionPersona("No se ha podido realizar la operación.");
         }
+        return personas;
     }
+
 
     //acabado
     public void addPersona(PersonaVO p) throws ExcepcionPersona {
-        try {
-            Connection conn = this.conexion.conectarBD();
-            this.stmt = conn.createStatement();
-            this.query = "INSERT INTO persona (dni, nombre, apellidos, direccion, localidad, provincia) VALUES ('" + p.getDni() + "','" + p.getNombre() + "','" + p.getApellidos() + "','" + p.getDireccion() + "','" + p.getLocalidad() + "','" + p.getProvincia() + "');";
-            this.stmt.executeUpdate(this.query);
-            this.stmt.close();
-            this.conexion.desconectarBD(conn);
-        } catch (SQLException var3) {
+
+        String query = "INSERT INTO persona (dni, nombre, apellidos, direccion, localidad, provincia) VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection conn = this.conexion.conectarBD();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, p.getDni());
+            stmt.setString(2, p.getNombre());
+            stmt.setString(3, p.getApellidos());
+            stmt.setString(4, p.getDireccion());
+            stmt.setString(5, p.getLocalidad());
+            stmt.setString(6, p.getProvincia());
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
             throw new ExcepcionPersona("No se ha podido realizar la operación.");
         }
     }
@@ -68,9 +71,8 @@ public class PersonaRepositoryImpl implements PersonaRepository {
         try {
             Connection conn = this.conexion.conectarBD();
             this.stmt = conn.createStatement();
-            Statement comando = conn.createStatement();
-            String sql = String.format("DELETE FROM persona WHERE codigo = %d", dni);
-            comando.executeUpdate(sql);
+            String sql = String.format("DELETE FROM persona WHERE dni = '%s'", dni);  // Uso de dni en lugar de codigo
+            stmt.executeUpdate(sql);
             this.conexion.desconectarBD(conn);
         } catch (SQLException var5) {
             throw new ExcepcionPersona("No se ha podido realizar la eliminación.");
@@ -82,8 +84,12 @@ public class PersonaRepositoryImpl implements PersonaRepository {
         try {
             Connection conn = this.conexion.conectarBD();
             this.stmt = conn.createStatement();
-            String sql = String.format("UPDATE persona SET nombre = '%s', apellidos = '%s', direccion = '%s', localidad = '%s', provincia = '%s', dni = '%s' WHERE dni = %d", personaVO.getNombre(), personaVO.getApellidos(), personaVO.getDireccion(), personaVO.getLocalidad(), personaVO.getProvincia(), personaVO.getDni());
+            String sql = String.format("UPDATE persona SET nombre = '%s', apellidos = '%s', direccion = '%s', localidad = '%s', provincia = '%s' WHERE dni = '%s'",
+                    personaVO.getNombre(), personaVO.getApellidos(), personaVO.getDireccion(),
+                    personaVO.getLocalidad(), personaVO.getProvincia(), personaVO.getDni());
             this.stmt.executeUpdate(sql);
+            this.stmt.close();
+            this.conexion.desconectarBD(conn);
         } catch (Exception var4) {
             throw new ExcepcionPersona("No se ha podido realizar la edición.");
         }
@@ -103,7 +109,7 @@ public class PersonaRepositoryImpl implements PersonaRepository {
 
             return lastDni;
         } catch (SQLException var5) {
-            throw new ExcepcionPersona("No se ha podido realizar la busqueda del DNI.");
+            throw new ExcepcionPersona("No se ha podido realizar la búsqueda del DNI.");
         }
     }
 

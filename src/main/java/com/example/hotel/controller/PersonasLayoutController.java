@@ -46,15 +46,14 @@ public class PersonasLayoutController {
         tablaPersonas.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showPersonDetails(newValue));
     }
 
-
-//    @FXML
-//    private void handleNewPerson() throws IOException {
-//        Persona tempPersona = new Persona();
-//        boolean okClicked = mainApp.showPersonEditDialog(tempPersona);
-//        if (okClicked) {
-//            mainApp.getPersonas().add(tempPersona);
-//        }
-//    }
+    @FXML
+    private void handleNewPerson() throws IOException {
+        Persona tempPersona = new Persona();
+        boolean okClicked = mainApp.showPersonEditDialog(tempPersona);
+        if (okClicked) {
+            mainApp.getPersonas().add(tempPersona);
+        }
+    }
 
     @FXML
     private void handleDeletePerson() {
@@ -72,27 +71,26 @@ public class PersonasLayoutController {
         }
     }
 
+    @FXML
+    private void handleEditPerson() throws IOException {
+        Persona selectedPerson = tablaPersonas.getSelectionModel().getSelectedItem();
+        if (selectedPerson != null) {
+            boolean okClicked = mainApp.showPersonEditDialog(selectedPerson);
+            if (okClicked) {
+                showPersonDetails(selectedPerson);
+            }
 
-//    @FXML
-//    private void handleEditPerson() {
-//        Persona selectedPerson = tablaPersonas.getSelectionModel().getSelectedItem();
-//        if (selectedPerson != null) {
-//            boolean okClicked = mainApp.showPersonEditDialog(selectedPerson);
-//            if (okClicked) {
-//                showPersonDetails(selectedPerson);
-//            }
-//
-//        } else {
-//            // Nada seleccionado.
-//            Alert alert = new Alert(Alert.AlertType.WARNING);
-//            alert.setTitle("Seleciona algo");
-//            alert.setHeaderText("Ninguna persona selecionada");
-//            alert.setContentText("Elige una persona de la tabla.");
-//
-//            alert.showAndWait();
-//        }
-//
-//    }
+        } else {
+            // Nada seleccionado.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Seleciona algo");
+            alert.setHeaderText("Ninguna persona selecionada");
+            alert.setContentText("Elige una persona de la tabla.");
+
+            alert.showAndWait();
+        }
+
+    }
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;

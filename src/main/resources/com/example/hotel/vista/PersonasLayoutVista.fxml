@@ -101,11 +101,11 @@
                   </GridPane>
                   <HBox alignment="CENTER" layoutX="215.0" layoutY="717.0" prefHeight="37.0" prefWidth="230.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#hanldeNewPerson" prefHeight="28.0" prefWidth="73.0" style="-fx-background-color: #E1DF66;" text="Añadir" textFill="#285d66">
+                        <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="73.0" style="-fx-background-color: #E1DF66;" text="Añadir" textFill="#285d66" onAction="#handleNewPerson">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font></Button>
-                        <Button mnemonicParsing="false" onAction="#handleEditPerson" prefHeight="28.0" prefWidth="66.0" style="-fx-padding: 5; -fx-background-color: #E1DF66;" text="Editar" textFill="#285d66">
+                        <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="66.0" style="-fx-padding: 5; -fx-background-color: #E1DF66;" text="Editar" textFill="#285d66" onAction="#handleEditPerson">
                            <HBox.margin>
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin>
@@ -113,7 +113,7 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#handleDeletePerson" prefHeight="28.0" prefWidth="89.0" style="-fx-background-color: #E1DF66;" text="Eliminar" textFill="#285d66">
+                        <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="89.0" style="-fx-background-color: #E1DF66;" text="Eliminar" textFill="#285d66" onAction="#handleDeletePerson">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font></Button>
