@@ -1,6 +1,6 @@
 package model.repository.impl;
 
-import Modelo.repository.impl.ConexionJDBC;
+import model.repository.impl.ConexionJDBC;
 import model.ExcepcionReserva;
 import model.ReservaVO;
 import model.repository.ReservaRepository;

@@ -111,6 +111,9 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Agrega esta dependencia para conectar con MySQL -->
+
     </dependencies>
 
     <build>

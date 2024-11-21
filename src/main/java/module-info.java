@@ -11,7 +11,6 @@ module com.example.hotel {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
-    requires AccesoBBDDMoneda;
     requires mysql.connector.java;
 
     opens com.example.hotel to javafx.fxml;
