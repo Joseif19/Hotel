@@ -21,57 +21,29 @@ import java.util.ArrayList;
 public class MainApp extends Application {
 
     private Stage primaryStage;
-    private AnchorPane rootLayout;
-    private ObservableList<Persona> personas = FXCollections.observableArrayList();
-
-    // Instancia del repositorio
-    private PersonaRepository personaRepository = new PersonaRepositoryImpl();
+    private ObservableList<Persona> personData = FXCollections.observableArrayList();
+    private PersonaRepositoryImpl repository = new PersonaRepositoryImpl();
 
     public MainApp() {
     }
 
-    public ObservableList<Persona> getPersonas() {
-        return personas;
+    public ObservableList<Persona> getPersonData() {
+        return personData;
     }
 
-    @Override
-    public void start(Stage primaryStage) {
-        this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("Hotel");
-
-        initRootLayout();
-        cargarPersonasDesdeBaseDeDatos();  // Cargar personas de la base de datos
-    }
-
-    // Método para cargar las personas desde la base de datos
-    private void cargarPersonasDesdeBaseDeDatos() {
-        try {
-            ArrayList<model.PersonaVO> listaPersonas = personaRepository.ObtenerListaPersonas();
-            for (model.PersonaVO personaVO : listaPersonas) {
-                // Convierte PersonaVO a Persona (si es necesario)
-                Persona persona = new Persona(personaVO.getDni(), personaVO.getNombre(), personaVO.getApellidos(), personaVO.getDireccion(), personaVO.getLocalidad(), personaVO.getProvincia());
-                personas.add(persona);
-            }
-        } catch (ExcepcionPersona e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Error al cargar personas");
-            alert.setContentText("No se ha podido cargar las personas desde la base de datos.");
-            alert.showAndWait();
-        }
-    }
-
-    public void initRootLayout() {
+    public void showPersonOverview() throws ExcepcionPersona {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/com/example/hotel/vista/PersonasLayoutVista.fxml"));
-            AnchorPane rootLayout = (AnchorPane) loader.load();
+            AnchorPane personOverview = (AnchorPane) loader.load();
 
-            // Asegúrate de llamar al método setMainApp aquí
             PersonasLayoutController controller = loader.getController();
-            controller.setMainApp(this);  // Pasamos la instancia de MainApp al controlador
+            controller.setMainApp(this);
+            controller.setPersonaRepository(repository);
+            personData=controller.descargarPersonas();
 
-            Scene escena = new Scene(rootLayout);
+
+            Scene escena = new Scene(personOverview);
             primaryStage.setScene(escena);
             primaryStage.show();
 
@@ -80,32 +52,39 @@ public class MainApp extends Application {
         }
     }
 
+    @Override
+    public void start(Stage primaryStage) throws ExcepcionPersona {
+        this.primaryStage = primaryStage;
+        this.primaryStage.setTitle("Agenda");
+
+        showPersonOverview();
+    }
+
     public boolean showPersonEditDialog(Persona persona) {
         try {
-            // Cargar el archivo FXML
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/com/example/hotel/vista/PersonEditDialogVista.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
-            // Crear un nuevo escenario de diálogo
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Editar Persona");
+            if(persona.getDni() != null){
+                dialogStage.setTitle("Editar Persona");
+            }else{
+                dialogStage.setTitle("Añadir Persona");
+            }
+
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
-            // Obtener el controlador del diálogo
             PersonEditDialogController controller = loader.getController();
-            controller.setDialogStage(dialogStage);  // Establecer el escenario del diálogo
-            controller.setPerson(persona);           // Pasar la persona que se va a editar
+            controller.setDialogStage(dialogStage);
+            controller.setPerson(persona);
 
-            // Mostrar el diálogo y esperar a que el usuario lo cierre
             dialogStage.showAndWait();
 
-            // Devolver si el usuario hizo clic en OK en el diálogo
             return controller.isOkClicked();
         } catch (IOException e) {
-            // Manejo de errores si no se puede cargar el diálogo
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("No se pudo cargar el diálogo");
@@ -117,7 +96,7 @@ public class MainApp extends Application {
         }
     }
 
-    public static void main(String[] args) {
-        launch();
-    }
+    public Stage getPrimaryStage() {return primaryStage;}
+
+    public static void main(String[] args) {launch(args);}
 }

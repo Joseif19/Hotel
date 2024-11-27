@@ -1,15 +1,20 @@
 package com.example.hotel.controller;
 
 import com.example.hotel.MainApp;
+import model.ExcepcionPersona;
 import model.Persona;
-import model.repository.impl.PersonaDAO;
+import model.PersonaUtil;
+import model.repository.PersonaRepository;
+import model.repository.impl.PersonaRepositoryImpl;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-import java.io.IOException;
+import java.util.ArrayList;
 
 public class PersonasLayoutController {
 
@@ -19,6 +24,8 @@ public class PersonasLayoutController {
     private TableColumn<Persona, String> firstNameColumn;
     @FXML
     private TableColumn<Persona, String> lastNameColumn;
+
+    private ObservableList<Persona> personaList = FXCollections.observableArrayList();
 
     @FXML
     private Label dni;
@@ -34,9 +41,8 @@ public class PersonasLayoutController {
     private Label provincia;
 
     private MainApp mainApp;
-    private PersonaDAO personaDAO = new PersonaDAO(); // Acceso a datos
+    private PersonaRepository personaRepository = new PersonaRepositoryImpl(); // Acceso a datos
 
-    // Constructor vacío
     public PersonasLayoutController() {
     }
 
@@ -46,27 +52,33 @@ public class PersonasLayoutController {
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().nombreProperty());
         lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().apellidosProperty());
 
-        // Cargar las personas desde la base de datos
-        loadPersonasFromDatabase();
+        showPersonDetails(null);
 
         // Configurar la selección de la tabla
         tablaPersonas.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showPersonDetails(newValue));
     }
 
+    public void setPersonaRepository(PersonaRepositoryImpl personaRepository) {
+        this.personaRepository = personaRepository;
+    }
+
     @FXML
-    private void handleNewPerson() throws IOException {
+    private void handleNewPerson() throws ExcepcionPersona {
         Persona tempPersona = new Persona();
         boolean okClicked = mainApp.showPersonEditDialog(tempPersona);
         if (okClicked) {
-            mainApp.getPersonas().add(tempPersona);
+            personaRepository.addPersona(PersonaUtil.personaToPersonaVO(tempPersona));
+            mainApp.getPersonData().add(tempPersona);
         }
     }
 
     @FXML
-    private void handleDeletePerson() {
+    private void handleDeletePerson() throws ExcepcionPersona {
         int selectedIndex = tablaPersonas.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
+            Persona persona = tablaPersonas.getSelectionModel().getSelectedItem();
             tablaPersonas.getItems().remove(selectedIndex);
+            personaRepository.deletePersona(persona.getDni());
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Selecciona algo");
@@ -78,12 +90,13 @@ public class PersonasLayoutController {
     }
 
     @FXML
-    private void handleEditPerson() throws IOException {
+    private void handleEditPerson() throws ExcepcionPersona {
         Persona selectedPerson = tablaPersonas.getSelectionModel().getSelectedItem();
         if (selectedPerson != null) {
             boolean okClicked = mainApp.showPersonEditDialog(selectedPerson);
             if (okClicked) {
-                showPersonDetails(selectedPerson);
+                personaRepository.editPersona(PersonaUtil.personaToPersonaVO(selectedPerson));
+                descargarPersonas();
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -95,21 +108,22 @@ public class PersonasLayoutController {
         }
     }
 
-    private void loadPersonasFromDatabase() {
-        // Asegúrate de que mainApp no sea null antes de usarlo
-        if (mainApp != null) {
-            mainApp.getPersonas().clear();
-            mainApp.getPersonas().addAll(personaDAO.getAllPersonas());
-            System.out.println("Personas cargadas: " + mainApp.getPersonas().size());
+    // Método para cargar y actualizar la lista de personas desde la base de datos
+    public ObservableList<Persona> descargarPersonas() {
+        try {
+            ArrayList<Persona> personas = PersonaUtil.personaVOListToPersonaList(personaRepository.ObtenerListaPersonas());
+            personaList.setAll(personas);
+            tablaPersonas.setItems(personaList);
+            return personaList;
+        } catch (ExcepcionPersona e) {
+            throw new RuntimeException(e);
         }
     }
 
-    // Este método garantiza que el objeto mainApp se pase correctamente al controlador
+    // Establece el objeto mainApp correctamente
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-
-        // Establece los elementos de la tabla
-        tablaPersonas.setItems(mainApp.getPersonas());
+        tablaPersonas.setItems(mainApp.getPersonData());
     }
 
     private void showPersonDetails(Persona person) {

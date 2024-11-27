@@ -19,7 +19,6 @@ public class Persona {
         this.dni = new SimpleStringProperty(dni);
         this.nombre = new SimpleStringProperty(nombre);
         this.apellidos = new SimpleStringProperty(apellidos);
-
         this.direccion = new SimpleStringProperty(direccion);
         this.localidad = new SimpleStringProperty(localidad);
         this.provincia = new SimpleStringProperty(provincia);
@@ -31,12 +30,16 @@ public class Persona {
     public void setDni(String dni) {
         this.dni.set(dni);
     }
-    public StringProperty dniProperty() {return dni;}
+    public StringProperty dniProperty() {
+        return dni;
+    }
 
     public String getNombre() {
         return nombre.get();
     }
-    public void setNombre(String nombre) { this.nombre.set(nombre);}
+    public void setNombre(String nombre) {
+        this.nombre.set(nombre);
+    }
     public StringProperty nombreProperty() {
         return nombre;
     }
@@ -47,7 +50,9 @@ public class Persona {
     public void setApellidos(String apellidos) {
         this.apellidos.set(apellidos);
     }
-    public StringProperty apellidosProperty() {return apellidos;}
+    public StringProperty apellidosProperty() {
+        return apellidos;
+    }
 
     public String getDireccion() {
         return direccion.get();

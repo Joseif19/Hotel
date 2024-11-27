@@ -14,10 +14,10 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="215.0">
                <children>
-                  <TableView fx:id="tablaPersonas" layoutX="6.0" prefHeight="593.0" prefWidth="442.0" style="-fx-background-color: #6DA095;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tablaPersonas" prefHeight="815.0" prefWidth="632.0" style="-fx-background-color: #6DA095;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="firstNameColumn" prefWidth="266.0" style="-fx-background-color: #6DA095;" text="Nombre" />
-                      <TableColumn fx:id="lastNameColumn" prefWidth="365.0" style="-fx-background-color: #6DA095;" text="Apellidos" />
+                      <TableColumn fx:id="firstNameColumn" prefWidth="340.0" style="-fx-background-color: #6DA095;" text="Nombre" />
+                      <TableColumn fx:id="lastNameColumn" prefWidth="291.0" style="-fx-background-color: #6DA095;" text="Apellidos" />
                     </columns>
                   </TableView>
                </children>
@@ -47,7 +47,7 @@
                             <font>
                                 <Font name="System Bold" size="15.0" />
                             </font> </Label>
-                        <Label fx:id="nombre" text="Label" textFill="#285d66" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Label fx:id="nombre" prefHeight="21.0" prefWidth="127.0" textFill="#285d66" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <font>
                               <Font size="15.0" />
                            </font></Label>
@@ -56,7 +56,7 @@
                          <font>
                              <Font name="System Bold" size="15.0" />
                          </font> </Label>
-                        <Label fx:id="apellidos" text="Label" textFill="#285d66" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <Label fx:id="apellidos" textFill="#285d66" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <font>
                               <Font size="15.0" />
                            </font></Label>
@@ -65,7 +65,7 @@
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font></Label>
-                        <Label fx:id="dni" text="Label" textFill="#285d66" GridPane.columnIndex="1">
+                        <Label fx:id="dni" textFill="#285d66" GridPane.columnIndex="1">
                            <font>
                               <Font size="15.0" />
                            </font></Label>
@@ -74,7 +74,7 @@
                          <font>
                              <Font name="System Bold" size="15.0" />
                          </font> </Label>
-                        <Label fx:id="direccion" text="Label" textFill="#285d66" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <Label fx:id="direccion" prefHeight="21.0" prefWidth="178.0" textFill="#285d66" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <font>
                               <Font size="15.0" />
                            </font></Label>
@@ -83,7 +83,7 @@
                       <font>
                           <Font name="System Bold" size="15.0" />
                       </font> </Label>
-                        <Label fx:id="localidad" text="Label" textFill="#285d66" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                        <Label fx:id="localidad" prefHeight="21.0" prefWidth="192.0" textFill="#285d66" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <font>
                               <Font size="15.0" />
                            </font></Label>
@@ -92,7 +92,7 @@
                    <font>
                        <Font name="System Bold" size="15.0" />
                    </font> </Label>
-                        <Label fx:id="provincia" text="Label" textFill="#285d66" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                        <Label fx:id="provincia" prefHeight="21.0" prefWidth="139.0" textFill="#285d66" GridPane.columnIndex="1" GridPane.rowIndex="5">
                            <font>
                               <Font size="15.0" />
                            </font></Label>
@@ -101,11 +101,11 @@
                   </GridPane>
                   <HBox alignment="CENTER" layoutX="215.0" layoutY="717.0" prefHeight="37.0" prefWidth="230.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="73.0" style="-fx-background-color: #E1DF66;" text="Añadir" textFill="#285d66" onAction="#handleNewPerson">
+                        <Button mnemonicParsing="false" onAction="#handleNewPerson" prefHeight="28.0" prefWidth="73.0" style="-fx-background-color: #E1DF66;" text="Añadir" textFill="#285d66">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font></Button>
-                        <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="66.0" style="-fx-padding: 5; -fx-background-color: #E1DF66;" text="Editar" textFill="#285d66" onAction="#handleEditPerson">
+                        <Button mnemonicParsing="false" onAction="#handleEditPerson" prefHeight="28.0" prefWidth="66.0" style="-fx-padding: 5; -fx-background-color: #E1DF66;" text="Editar" textFill="#285d66">
                            <HBox.margin>
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin>
@@ -113,7 +113,7 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="89.0" style="-fx-background-color: #E1DF66;" text="Eliminar" textFill="#285d66" onAction="#handleDeletePerson">
+                        <Button mnemonicParsing="false" onAction="#handleDeletePerson" prefHeight="28.0" prefWidth="89.0" style="-fx-background-color: #E1DF66;" text="Eliminar" textFill="#285d66">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font></Button>

@@ -3,60 +3,37 @@ package model;
 import java.util.Date;
 
 public class ReservaVO {
-    Integer id_reserva;
-    Date fechaEntrada;
-    Date fechaSalida;
-    Integer numHabitaciones;
-    String tipoHabitacion;
-    Boolean fumador;
-    String regimenAlojamiento;
+    private Integer idReserva;
+    private String fechaLlegada;
+    private String fechaSalida;
+    private String tipoHabitacion;
+    private Boolean fumador; // Asumiendo que fumador es un valor booleano
+    private String regAlojamiento;
+    private Integer personaFK;
 
-    public ReservaVO(Date fechaEntrada, Date fechaSalida, Integer numHabitaciones) {
-        this.fechaEntrada = fechaEntrada;
-        this.fechaSalida = fechaSalida;
-        this.numHabitaciones = numHabitaciones;
+    // Getters y Setters
+    public Integer getIdReserva() {
+        return idReserva;
     }
 
-    public ReservaVO(Integer id_reserva, Date fechaEntrada, Date fechaSalida, Integer numHabitaciones, String tipoHabitacion, Boolean fumador, String regimenAlojamiento) {
-        this.id_reserva = id_reserva;
-        this.fechaEntrada = fechaEntrada;
-        this.fechaSalida = fechaSalida;
-        this.numHabitaciones = numHabitaciones;
-        this.tipoHabitacion = tipoHabitacion;
-        this.fumador = fumador;
-        this.regimenAlojamiento = regimenAlojamiento;
+    public void setIdReserva(Integer idReserva) {
+        this.idReserva = idReserva;
     }
 
-    public Integer getId_reserva() {
-        return id_reserva;
+    public String getFechaLlegada() {
+        return fechaLlegada;
     }
 
-    public void setId_reserva(Integer id_reserva) {
-        this.id_reserva = id_reserva;
+    public void setFechaLlegada(String fechaLlegada) {
+        this.fechaLlegada = fechaLlegada;
     }
 
-    public Date getFechaEntrada() {
-        return fechaEntrada;
-    }
-
-    public void setFechaEntrada(Date fechaEntrada) {
-        this.fechaEntrada = fechaEntrada;
-    }
-
-    public Date getFechaSalida() {
+    public String getFechaSalida() {
         return fechaSalida;
     }
 
-    public void setFechaSalida(Date fechaSalida) {
+    public void setFechaSalida(String fechaSalida) {
         this.fechaSalida = fechaSalida;
-    }
-
-    public Integer getNumHabitaciones() {
-        return numHabitaciones;
-    }
-
-    public void setNumHabitaciones(Integer numHabitaciones) {
-        this.numHabitaciones = numHabitaciones;
     }
 
     public String getTipoHabitacion() {
@@ -75,11 +52,19 @@ public class ReservaVO {
         this.fumador = fumador;
     }
 
-    public String getRegimenAlojamiento() {
-        return regimenAlojamiento;
+    public String getRegAlojamiento() {
+        return regAlojamiento;
     }
 
-    public void setRegimenAlojamiento(String regimenAlojamiento) {
-        this.regimenAlojamiento = regimenAlojamiento;
+    public void setRegAlojamiento(String regAlojamiento) {
+        this.regAlojamiento = regAlojamiento;
+    }
+
+    public Integer getPersonaFK() {
+        return personaFK;
+    }
+
+    public void setPersonaFK(Integer personaFK) {
+        this.personaFK = personaFK;
     }
 }
