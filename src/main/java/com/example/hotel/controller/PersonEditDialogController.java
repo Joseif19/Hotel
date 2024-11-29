@@ -43,6 +43,7 @@ public class PersonEditDialogController {
         if (persona.getDni() != null) {
             dniField.editableProperty().set(false);
         }
+        dniField.setText(persona.getDni());
         nombreField.setText(persona.getNombre());
         apellidosField.setText(persona.getApellidos());
         direccionField.setText(persona.getDireccion());
@@ -56,8 +57,6 @@ public class PersonEditDialogController {
 
     @FXML
     private void handleOk() {
-        System.out.println("Ejecutando handleOk");
-
         String dni = dniField.getText();
 
         if (!validarDNI(dni)) {
@@ -116,14 +115,14 @@ public class PersonEditDialogController {
 
     // Método que simula la verificación de si un DNI ya está registrado
     private boolean existeDni(String dni) {
-        // Simulamos que personasRegistradas tiene algunas personas
         for (Persona p : personasRegistradas) {
-            System.out.println("Comparando DNI: " + p.getDni() + " con " + dni);
-            if (p.getDni().equals(dni)) {
-                return true;  // El DNI ya está registrado
+            // Excluir el registro de la persona que se está editando
+            if (p.getDni().equals(dni) && !p.equals(persona)) {
+                return true;  // El DNI está duplicado en otra persona
             }
         }
-        return false;  // El DNI no está registrado
+        return false;  // El DNI no está duplicado
     }
+
 
 }

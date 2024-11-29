@@ -11,12 +11,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.Persona;
 import javafx.scene.control.Alert;
-import model.repository.PersonaRepository;
 import model.repository.impl.PersonaRepositoryImpl;
 import model.ExcepcionPersona;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class MainApp extends Application {
 
@@ -34,7 +32,7 @@ public class MainApp extends Application {
     public void showPersonOverview() throws ExcepcionPersona {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/com/example/hotel/vista/PersonasLayoutVista.fxml"));
+            loader.setLocation(MainApp.class.getResource("/com/example/hotel/vista/LayoutVista.fxml"));
             AnchorPane personOverview = (AnchorPane) loader.load();
 
             PersonasLayoutController controller = loader.getController();

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.*?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<AnchorPane prefHeight="459.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.example.hotel.controller.ReservaDialogController">
+    <children>
+        <!-- Título de la ventana -->
+        <Label layoutX="150" layoutY="20" style="-fx-font-size: 20px;" text="Formulario de Reserva" />
+
+        <!-- Fechas de llegada y salida -->
+        <Label layoutX="20" layoutY="60" text="Fecha de llegada:" />
+        <DatePicker fx:id="fechaLlegada" layoutX="150" layoutY="60" />
+
+        <Label layoutX="20" layoutY="100" text="Fecha de salida:" />
+        <DatePicker fx:id="fechaSalida" layoutX="150" layoutY="100" />
+
+        <!-- Número de habitaciones -->
+        <Label layoutX="20" layoutY="140" text="Número de habitaciones:" />
+        <Spinner fx:id="numHabitaciones" layoutX="150" layoutY="140" max="1" min="1" />
+
+        <!-- Tipo de habitación -->
+        <Label layoutX="20" layoutY="180" text="Tipo de habitación:" />
+        <ComboBox fx:id="tipoHabitacion" layoutX="150" layoutY="180">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Doble de uso individual (20 Habitaciones)" />
+                    <String fx:value="Doble (80 Habitaciones)" />
+                    <String fx:value="Junior suite (15 Habitaciones)" />
+                    <String fx:value="Suite (5 Habitaciones)" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <!-- Fumador/no fumador -->
+        <Label layoutX="20" layoutY="220" text="¿Fumador?" />
+        <RadioButton fx:id="fumador" layoutX="150" layoutY="220" text="Fumador" />
+        <RadioButton fx:id="noFumador" layoutX="220" layoutY="220" text="No Fumador" />
+
+        <!-- Régimen de alojamiento -->
+        <Label layoutX="20" layoutY="260" text="Régimen de alojamiento:" />
+        <ComboBox fx:id="regimen" layoutX="150" layoutY="260">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Alojamiento y desayuno" />
+                    <String fx:value="Media pensión" />
+                    <String fx:value="Pensión completa" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <!-- Botón de reserva -->
+        <Button fx:id="btnHacerReserva" layoutX="150" layoutY="300" text="Hacer reserva" />
+    </children>
+</AnchorPane>
