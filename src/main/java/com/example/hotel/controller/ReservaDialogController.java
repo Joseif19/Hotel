@@ -7,10 +7,15 @@ import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.Persona;
+import model.Reserva;
 
 import java.io.IOException;
 
 public class ReservaDialogController {
+
+    private Stage dialogStage;
+    private Reserva reserva;
 
     @FXML
     private DatePicker fechaLlegada;
@@ -28,6 +33,39 @@ public class ReservaDialogController {
     private ComboBox<String> regimen;
     @FXML
     private Button btnHacerReserva;
+
+    public void setDialogStage(Stage dialogStage) {
+        this.dialogStage = dialogStage;
+    }
+
+    public void setReserva(Reserva reserva) {
+        this.reserva = reserva;
+
+        // Si estamos editando una reserva, configuramos los valores en los controles.
+        // No es necesario configurar el idReserva porque es autoincremental.
+
+        // Establecer las fechas de llegada y salida
+        fechaLlegada.setValue(reserva.getFechaLlegada());  // setValue para DatePicker
+        fechaSalida.setValue(reserva.getFechaSalida());    // setValue para DatePicker
+
+        // Establecer el número de habitaciones en el Spinner
+        numHabitaciones.getValueFactory().setValue(reserva.getNumHabitaciones());  // setValue para Spinner
+
+        // Establecer el tipo de habitación en el ComboBox
+        tipoHabitacion.setValue(reserva.getTipoHabitacion());  // setValue para ComboBox
+
+        // Establecer el régimen de alojamiento en el ComboBox
+        regimen.setValue(reserva.getRegAlojamiento());  // setValue para ComboBox
+
+        // Establecer la preferencia de fumador en los RadioButtons
+        if (reserva.isFumador()) {
+            fumador.setSelected(true);  // Seleccionar el RadioButton correspondiente
+        } else {
+            noFumador.setSelected(true);  // Seleccionar el RadioButton correspondiente
+        }
+    }
+
+
 
     @FXML
     private void initialize() {

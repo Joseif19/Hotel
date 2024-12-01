@@ -5,97 +5,45 @@ import javafx.beans.property.*;
 import java.time.LocalDate;
 
 public class Reserva {
+    private IntegerProperty idReserva = new SimpleIntegerProperty();
+    private ObjectProperty<LocalDate> fechaLlegada = new SimpleObjectProperty<>();
+    private ObjectProperty<LocalDate> fechaSalida = new SimpleObjectProperty<>();
+    private IntegerProperty numHabitaciones = new SimpleIntegerProperty();
+    private StringProperty tipoHabitacion = new SimpleStringProperty();
+    private BooleanProperty fumador = new SimpleBooleanProperty();
+    private StringProperty regAlojamiento = new SimpleStringProperty();
+    private IntegerProperty personaFK = new SimpleIntegerProperty();
 
-    private final IntegerProperty idReserva;
-    private final ObjectProperty<LocalDate> fechaLlegada;
-    private final ObjectProperty<LocalDate> fechaSalida;
-    private final StringProperty tipoHabitacion;
-    private final BooleanProperty fumador;
-    private final StringProperty regAlojamiento;
-    private final IntegerProperty personaFK;
+    // Getters y setters usando propiedades JavaFX
+    public int getIdReserva() { return idReserva.get(); }
+    public void setIdReserva(int idReserva) { this.idReserva.set(idReserva); }
+    public IntegerProperty idReservaProperty() { return idReserva; }
 
-    public Reserva() {
-        this(0, null, null, "--Tipo Habitacion--", false, "--Reg Alojamiento--", 0);
-    }
+    public LocalDate getFechaLlegada() { return fechaLlegada.get(); }
+    public void setFechaLlegada(LocalDate fechaLlegada) { this.fechaLlegada.set(fechaLlegada); }
+    public ObjectProperty<LocalDate> fechaLlegadaProperty() { return fechaLlegada; }
 
-    public Reserva(int idReserva, LocalDate fechaLlegada, LocalDate fechaSalida, String tipoHabitacion, boolean fumador, String regAlojamiento, int personaFK) {
-        this.idReserva = new SimpleIntegerProperty(idReserva);
-        this.fechaLlegada = new SimpleObjectProperty<>(fechaLlegada);
-        this.fechaSalida = new SimpleObjectProperty<>(fechaSalida);
-        this.tipoHabitacion = new SimpleStringProperty(tipoHabitacion);
-        this.fumador = new SimpleBooleanProperty(fumador);
-        this.regAlojamiento = new SimpleStringProperty(regAlojamiento);
-        this.personaFK = new SimpleIntegerProperty(personaFK);
-    }
+    public LocalDate getFechaSalida() { return fechaSalida.get(); }
+    public void setFechaSalida(LocalDate fechaSalida) { this.fechaSalida.set(fechaSalida); }
+    public ObjectProperty<LocalDate> fechaSalidaProperty() { return fechaSalida; }
 
-    public int getIdReserva() {
-        return idReserva.get();
-    }
-    public void setIdReserva(int idReserva) {
-        this.idReserva.set(idReserva);
-    }
-    public IntegerProperty idReservaProperty() {
-        return idReserva;
-    }
+    public int getNumHabitaciones() { return numHabitaciones.get(); }
+    public void setNumHabitaciones(int numHabitaciones) { this.numHabitaciones.set(numHabitaciones); }
+    public IntegerProperty numHabitacionesProperty() { return numHabitaciones; }
 
-    public LocalDate getFechaLlegada() {
-        return fechaLlegada.get();
-    }
-    public void setFechaLlegada(LocalDate fechaLlegada) {
-        this.fechaLlegada.set(fechaLlegada);
-    }
-    public ObjectProperty<LocalDate> fechaLlegadaProperty() {
-        return fechaLlegada;
-    }
+    public String getTipoHabitacion() { return tipoHabitacion.get(); }
+    public void setTipoHabitacion(String tipoHabitacion) { this.tipoHabitacion.set(tipoHabitacion); }
+    public StringProperty tipoHabitacionProperty() { return tipoHabitacion; }
 
-    public LocalDate getFechaSalida() {
-        return fechaSalida.get();
-    }
-    public void setFechaSalida(LocalDate fechaSalida) {
-        this.fechaSalida.set(fechaSalida);
-    }
-    public ObjectProperty<LocalDate> fechaSalidaProperty() {
-        return fechaSalida;
-    }
+    public boolean isFumador() { return fumador.get(); }
+    public void setFumador(boolean fumador) { this.fumador.set(fumador); }
+    public BooleanProperty fumadorProperty() { return fumador; }
 
-    public String getTipoHabitacion() {
-        return tipoHabitacion.get();
-    }
-    public void setTipoHabitacion(String tipoHabitacion) {
-        this.tipoHabitacion.set(tipoHabitacion);
-    }
-    public StringProperty tipoHabitacionProperty() {
-        return tipoHabitacion;
-    }
+    public String getRegAlojamiento() { return regAlojamiento.get(); }
+    public void setRegAlojamiento(String regAlojamiento) { this.regAlojamiento.set(regAlojamiento); }
+    public StringProperty regAlojamientoProperty() { return regAlojamiento; }
 
-    public boolean isFumador() {
-        return fumador.get();
-    }
-    public void setFumador(boolean fumador) {
-        this.fumador.set(fumador);
-    }
-    public BooleanProperty fumadorProperty() {
-        return fumador;
-    }
-
-    public String getRegAlojamiento() {
-        return regAlojamiento.get();
-    }
-    public void setRegAlojamiento(String regAlojamiento) {
-        this.regAlojamiento.set(regAlojamiento);
-    }
-    public StringProperty regAlojamientoProperty() {
-        return regAlojamiento;
-    }
-
-    public int getPersonaFK() {
-        return personaFK.get();
-    }
-    public void setPersonaFK(int personaFK) {
-        this.personaFK.set(personaFK);
-    }
-    public IntegerProperty personaFKProperty() {
-        return personaFK;
-    }
-
+    public int getPersonaFK() { return personaFK.get(); }
+    public void setPersonaFK(int personaFK) { this.personaFK.set(personaFK); }
+    public IntegerProperty personaFKProperty() { return personaFK; }
 }

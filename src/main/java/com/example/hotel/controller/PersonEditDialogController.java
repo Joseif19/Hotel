@@ -30,7 +30,6 @@ public class PersonEditDialogController {
 
     private static final String LETRAS = "TRWAGMYFPDXBNJZSQVHLCKE";
 
-    // Simulamos una base de datos con una lista de personas
     private static List<Persona> personasRegistradas = new ArrayList<>();
 
     public void setDialogStage(Stage dialogStage) {
@@ -85,7 +84,7 @@ public class PersonEditDialogController {
         persona.setProvincia(provinciaField.getText());
 
         okClicked = true;
-        personasRegistradas.add(persona);  // Agregar la persona a la lista simulada
+        personasRegistradas.add(persona);
         dialogStage.close();
     }
 
@@ -113,15 +112,13 @@ public class PersonEditDialogController {
         return letra == letraCalculada;
     }
 
-    // Método que simula la verificación de si un DNI ya está registrado
     private boolean existeDni(String dni) {
         for (Persona p : personasRegistradas) {
-            // Excluir el registro de la persona que se está editando
             if (p.getDni().equals(dni) && !p.equals(persona)) {
-                return true;  // El DNI está duplicado en otra persona
+                return true;
             }
         }
-        return false;  // El DNI no está duplicado
+        return false;
     }
 
 

@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="817.0" prefWidth="1293.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotel.controller.PersonasLayoutController">
+<AnchorPane prefHeight="852.0" prefWidth="1322.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotel.controller.LayoutController">
     <children>
         <SplitPane dividerPositions="0.40123934934159566" layoutX="168.0" layoutY="84.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
@@ -15,19 +15,19 @@
                         <TableView fx:id="tablaPersonas" prefHeight="815.0" prefWidth="632.0" style="-fx-background-color: #6DA095;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <columns>
                                 <TableColumn fx:id="firstNameColumn" prefWidth="239.0" style="-fx-background-color: #6DA095;" text="Nombre" />
-                                <TableColumn fx:id="lastNameColumn" prefWidth="274.0" style="-fx-background-color: #6DA095;" text="Apellidos" />
+                                <TableColumn fx:id="lastNameColumn" prefWidth="287.0" style="-fx-background-color: #6DA095;" text="Apellidos" />
                             </columns>
                         </TableView>
                     </children>
                 </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="431.0" prefWidth="342.0" style="-fx-background-color: #6DA095;">
                     <children>
-                        <Label layoutX="285.0" layoutY="32.0" text="Datos Personales" textFill="#e1df66">
+                        <Label layoutX="281.0" layoutY="21.0" text="Datos Personales" textFill="#e1df66">
                             <font>
                                 <Font name="System Bold" size="26.0" />
                             </font>
                         </Label>
-                        <GridPane layoutX="245.0" layoutY="75.0" prefHeight="261.0" prefWidth="422.0">
+                        <GridPane layoutX="244.0" layoutY="59.0" prefHeight="261.0" prefWidth="422.0">
                             <columnConstraints>
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -97,40 +97,18 @@
 
                             </children>
                         </GridPane>
-                        <!-- Nueva tabla para mostrar las reservas -->
-                        <TableView fx:id="tablaReservas" layoutX="49.0" layoutY="436.0" prefHeight="286.0" prefWidth="697.0">
-                            <columns>
-                                <TableColumn fx:id="colIdReserva" text="ID Reserva" />
-                                <TableColumn fx:id="colFechaEntrada" prefWidth="119.0" text="Fecha Entrada" />
-                                <TableColumn fx:id="colFechaSalida" prefWidth="102.0" text="Fecha Salida" />
-                                <TableColumn fx:id="colNumHabitaciones" prefWidth="96.0" text="Habitaciones" />
-                                <TableColumn fx:id="colTipoHabitacion" minWidth="3.0" prefWidth="123.0" text="Tipo Habitación" />
-                                <TableColumn fx:id="colFumador" minWidth="0.0" prefWidth="72.0" text="Fumador" />
-                                <TableColumn fx:id="colRegimen" prefWidth="101.0" text="Régimen" />
-                            </columns>
-                        </TableView>
-                  <Label layoutX="335.0" layoutY="381.0" text="Reservas:" textFill="#e1df66">
-                     <font>
-                        <Font name="System Bold" size="26.0" />
-                     </font>
-                  </Label>
-                        <HBox alignment="CENTER" layoutX="186.0" layoutY="744.0" prefHeight="37.0" prefWidth="422.0">
+
+                        <HBox alignment="CENTER" layoutX="251.0" layoutY="329.0" prefHeight="37.0" prefWidth="270.0">
                             <children>
-                                <!-- Botón "Hacer Reserva" agregado aquí, inicialmente oculto -->
-                                <Button fx:id="botonHacerReserva" mnemonicParsing="false" onAction="#handleHacerReserva" prefHeight="28.0" prefWidth="120.0" style="-fx-background-color: #E1DF66;" text="Hacer Reserva" textFill="#285d66" visible="true">
+                                <Button fx:id="botonAñadirPersona" mnemonicParsing="false" onAction="#handleNewPerson" prefHeight="28.0" prefWidth="73.0" style="-fx-background-color: #E1DF66;" text="Añadir" textFill="#285d66">
                                     <font>
                                         <Font name="System Bold" size="13.0" />
                                     </font>
+                                    <HBox.margin>
+                                        <Insets left="10.0" />
+                                    </HBox.margin>
                                 </Button>
-                                <Button mnemonicParsing="false" onAction="#handleNewPerson" prefHeight="28.0" prefWidth="73.0" style="-fx-background-color: #E1DF66;" text="Añadir" textFill="#285d66">
-                                    <font>
-                                        <Font name="System Bold" size="13.0" />
-                                    </font>
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                                </Button>
-                                <Button mnemonicParsing="false" onAction="#handleEditPerson" prefHeight="28.0" prefWidth="66.0" style="-fx-padding: 5; -fx-background-color: #E1DF66;" text="Editar" textFill="#285d66">
+                                <Button fx:id="botonEditarPersona" mnemonicParsing="false" onAction="#handleEditPerson" prefHeight="28.0" prefWidth="66.0" style="-fx-padding: 5; -fx-background-color: #E1DF66;" text="Editar" textFill="#285d66">
                                     <HBox.margin>
                                         <Insets left="10.0" right="10.0" />
                                     </HBox.margin>
@@ -138,17 +116,68 @@
                                         <Font name="System Bold" size="13.0" />
                                     </font>
                                 </Button>
-                                <Button mnemonicParsing="false" onAction="#handleDeletePerson" prefHeight="28.0" prefWidth="89.0" style="-fx-background-color: #E1DF66;" text="Eliminar" textFill="#285d66">
+                                <Button fx:id="botonEliminarPersona" mnemonicParsing="false" onAction="#handleDeletePerson" prefHeight="28.0" prefWidth="89.0" style="-fx-background-color: #E1DF66;" text="Eliminar" textFill="#285d66">
                                     <font>
                                         <Font name="System Bold" size="13.0" />
                                     </font>
-                           <HBox.margin>
-                              <Insets right="10.0" />
-                           </HBox.margin>
+                                    <HBox.margin>
+                                        <Insets right="10.0" />
+                                    </HBox.margin>
                                 </Button>
                             </children>
                         </HBox>
 
+                        <VBox fx:id="contenedorReservas" layoutX="50.0" layoutY="466.0" visible="false">
+   <children>
+                               <Label layoutX="341.0" layoutY="417.0" text="Reservas" textFill="#e1df66">
+                                   <font>
+                                       <Font name="System Bold" size="26.0" />
+                                   </font>
+                               </Label>
+   
+                           <TableView fx:id="tablaReservas" layoutX="50.0" layoutY="466.0" prefHeight="286.0" prefWidth="697.0">
+                               <columns>
+                                   <TableColumn fx:id="colIdReserva" text="ID Reserva" />
+                                   <TableColumn fx:id="colFechaEntrada" prefWidth="119.0" text="Fecha Entrada" />
+                                   <TableColumn fx:id="colFechaSalida" prefWidth="102.0" text="Fecha Salida" />
+                                   <TableColumn fx:id="colNumHabitaciones" prefWidth="96.0" text="Habitaciones" />
+                                   <TableColumn fx:id="colTipoHabitacion" minWidth="3.0" prefWidth="123.0" text="Tipo Habitación" />
+                                   <TableColumn fx:id="colFumador" minWidth="0.0" prefWidth="72.0" text="Fumador" />
+                                   <TableColumn fx:id="colRegimen" prefWidth="101.0" text="Régimen" />
+                               </columns>
+                           </TableView>
+   
+   
+                     <HBox alignment="CENTER" layoutX="263.0" layoutY="766.0" prefHeight="37.0" prefWidth="270.0">
+                        <children>
+                           <Button fx:id="botonAñadirReserva" mnemonicParsing="false" onAction="#handleNuevoReserva" prefHeight="28.0" prefWidth="73.0" style="-fx-background-color: #E1DF66;" text="Añadir" textFill="#285d66">
+                              <font>
+                                 <Font name="System Bold" size="13.0" />
+                              </font>
+                              <HBox.margin>
+                                 <Insets left="10.0" />
+                              </HBox.margin>
+                           </Button>
+                           <Button fx:id="botonEditarReserva" mnemonicParsing="false" onAction="#handleEditarReserva" prefHeight="28.0" prefWidth="66.0" style="-fx-padding: 5; -fx-background-color: #E1DF66;" text="Editar" textFill="#285d66">
+                              <font>
+                                 <Font name="System Bold" size="13.0" />
+                              </font>
+                              <HBox.margin>
+                                 <Insets left="10.0" right="10.0" />
+                              </HBox.margin>
+                           </Button>
+                           <Button fx:id="botonEliminarReserva" mnemonicParsing="false" onAction="#handleDeleteReserva" prefHeight="28.0" prefWidth="89.0" style="-fx-background-color: #E1DF66;" text="Eliminar" textFill="#285d66">
+                              <font>
+                                 <Font name="System Bold" size="13.0" />
+                              </font>
+                              <HBox.margin>
+                                 <Insets right="10.0" />
+                              </HBox.margin>
+                           </Button>
+                        </children>
+                     </HBox>
+   </children>
+                        </VBox>
                     </children>
                 </AnchorPane>
             </items>

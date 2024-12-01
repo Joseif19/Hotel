@@ -2,28 +2,24 @@
 
 <?import java.lang.*?>
 <?import javafx.collections.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.text.*?>
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="459.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.example.hotel.controller.ReservaDialogController">
+<AnchorPane prefHeight="459.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotel.controller.ReservaDialogController">
     <children>
         <!-- Título de la ventana -->
         <Label layoutX="150" layoutY="20" style="-fx-font-size: 20px;" text="Formulario de Reserva" />
 
         <!-- Fechas de llegada y salida -->
         <Label layoutX="20" layoutY="60" text="Fecha de llegada:" />
-        <DatePicker fx:id="fechaLlegada" layoutX="150" layoutY="60" />
+        <DatePicker fx:id="fechaLlegada" layoutX="150.0" layoutY="56.0" />
 
         <Label layoutX="20" layoutY="100" text="Fecha de salida:" />
         <DatePicker fx:id="fechaSalida" layoutX="150" layoutY="100" />
 
         <!-- Número de habitaciones -->
         <Label layoutX="20" layoutY="140" text="Número de habitaciones:" />
-        <Spinner fx:id="numHabitaciones" layoutX="150" layoutY="140" max="1" min="1" />
+        <Spinner fx:id="numHabitaciones" layoutX="164.0" layoutY="136.0" max="1" min="1" />
 
         <!-- Tipo de habitación -->
         <Label layoutX="20" layoutY="180" text="Tipo de habitación:" />
@@ -41,11 +37,11 @@
         <!-- Fumador/no fumador -->
         <Label layoutX="20" layoutY="220" text="¿Fumador?" />
         <RadioButton fx:id="fumador" layoutX="150" layoutY="220" text="Fumador" />
-        <RadioButton fx:id="noFumador" layoutX="220" layoutY="220" text="No Fumador" />
+        <RadioButton fx:id="noFumador" layoutX="230.0" layoutY="220.0" text="No Fumador" />
 
         <!-- Régimen de alojamiento -->
         <Label layoutX="20" layoutY="260" text="Régimen de alojamiento:" />
-        <ComboBox fx:id="regimen" layoutX="150" layoutY="260">
+        <ComboBox fx:id="regimen" layoutX="162.0" layoutY="256.0">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="Alojamiento y desayuno" />
