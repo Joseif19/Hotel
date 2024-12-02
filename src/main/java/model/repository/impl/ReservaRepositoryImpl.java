@@ -14,38 +14,37 @@ public class ReservaRepositoryImpl implements ReservaRepository {
 
     @Override
     public ArrayList<ReservaVO> ObtenerListaReservas() throws ExcepcionReserva {
-        try {
-            Connection conn = this.conexion.conectarBD();
-            this.reservas = new ArrayList<>();
-            String query = "SELECT id_reserva, fechaLlegada, fechaSalida, numHabitaciones, tipoHabitacion, fumadorSN, regimenAlojamiento, dni_personaFK FROM reservas";
-            PreparedStatement stmt = conn.prepareStatement(query);
-            ResultSet rs = stmt.executeQuery(query);
+        ArrayList<ReservaVO> reservas = new ArrayList<>();
+        String query = "SELECT id_reserva, fechaLlegada, fechaSalida, numHabitaciones, tipoHabitacion, fumadorSN, regimenAlojamiento, dni_personaFK FROM reservas";
+
+        try (Connection conn = this.conexion.conectarBD();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
                 ReservaVO reserva = new ReservaVO(
-                        rs.getInt("id_reserva"),  // id_reserva
-                        rs.getDate("fechaLlegada") != null ? rs.getDate("fechaLlegada").toLocalDate() : null, // fechaLlegada
-                        rs.getDate("fechaSalida") != null ? rs.getDate("fechaSalida").toLocalDate() : null,   // fechaSalida
-                        rs.getInt("numHabitaciones"),          // numHabitaciones
-                        rs.getString("tipoHabitacion"),        // tipoHabitacion
-                        rs.getBoolean("fumadorSN"),            // fumadorSN
-                        rs.getString("regimenAlojamiento"),    // regimenAlojamiento
-                        rs.getInt("dni_personaFK")             // dni_personaFK (Foreign Key)
+                        rs.getInt("id_reserva"),
+                        rs.getDate("fechaLlegada") != null ? rs.getDate("fechaLlegada").toLocalDate() : null,
+                        rs.getDate("fechaSalida") != null ? rs.getDate("fechaSalida").toLocalDate() : null,
+                        rs.getInt("numHabitaciones"),
+                        rs.getString("tipoHabitacion"),
+                        rs.getBoolean("fumadorSN"),
+                        rs.getString("regimenAlojamiento"),
+                        rs.getInt("dni_personaFK")
                 );
-                this.reservas.add(reserva);
+                reservas.add(reserva);
             }
-
-            this.conexion.desconectarBD(conn);
-            return this.reservas;
         } catch (SQLException e) {
             throw new ExcepcionReserva("No se ha podido realizar la operación: " + e.getMessage());
         }
+        return reservas;
     }
+
 
 
     @Override
     public void addReserva(ReservaVO r) throws ExcepcionReserva {
-        String query = "INSERT INTO reservas (fechaLlegada, fechaSalida, numHabitaciones, tipoHabitacion, fumadorSN, regimenAlojamiento) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO reservas (fechaLlegada, fechaSalida, numHabitaciones, tipoHabitacion, fumadorSN, regimenAlojamiento, dni_personaFK) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = conexion.conectarBD();
              PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -56,13 +55,14 @@ public class ReservaRepositoryImpl implements ReservaRepository {
             stmt.setString(4, r.getTipoHabitacion());
             stmt.setBoolean(5, r.getFumador());
             stmt.setString(6, r.getRegAlojamiento());
+            stmt.setInt(7, r.getPersonaFK()); // Relación con cliente
 
             stmt.executeUpdate();
-
         } catch (SQLException e) {
             throw new ExcepcionReserva("Error al agregar la reserva: " + e.getMessage());
         }
     }
+
 
     @Override
     public void deleteReserva(Integer idReserva) throws ExcepcionReserva {

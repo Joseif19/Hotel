@@ -1,16 +1,13 @@
 package com.example.hotel.controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.Persona;
 import model.Reserva;
-
-import java.io.IOException;
+import model.ReservaUtil;
+import model.repository.impl.ReservaRepositoryImpl;
+import model.ExcepcionReserva;
 
 public class ReservaDialogController {
 
@@ -34,8 +31,16 @@ public class ReservaDialogController {
     @FXML
     private Button btnHacerReserva;
 
+    private boolean okClicked = false;
+
+    private ReservaRepositoryImpl reservaRepository = new ReservaRepositoryImpl();
+
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
+    }
+
+    public boolean isOkClicked() {
+        return okClicked;
     }
 
     public void setReserva(Reserva reserva) {
@@ -88,24 +93,58 @@ public class ReservaDialogController {
 
     @FXML
     private void handleHacerReserva() {
-        try {
-            // Cargar el archivo FXML para la ventana de reserva
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/hotel/vista/ReservaDialogVista.fxml"));
-            AnchorPane reservaLayout = loader.load();
+        // Validate input
+        if (isInputValid()) {
+            // Capture data from form fields
+            reserva.setFechaLlegada(fechaLlegada.getValue());
+            reserva.setFechaSalida(fechaSalida.getValue());
+            reserva.setNumHabitaciones(numHabitaciones.getValue());
+            reserva.setTipoHabitacion(tipoHabitacion.getValue());
+            reserva.setFumador(fumador.isSelected());
+            reserva.setRegAlojamiento(regimen.getValue());
 
-            // Crear la escena para la nueva ventana
-            Scene escenaReserva = new Scene(reservaLayout);
-
-            // Crear la nueva ventana
-            Stage ventanaReserva = new Stage();
-            ventanaReserva.setTitle("Hacer Reserva");
-            ventanaReserva.setScene(escenaReserva);
-
-            // Mostrar la ventana
-            ventanaReserva.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Manejo de errores
+            try {
+                // Convert to ReservaVO and save to database
+                reservaRepository.addReserva(ReservaUtil.toReservaVO(reserva));
+                dialogStage.close(); // Close the dialog if successful
+            } catch (ExcepcionReserva e) {
+                showErrorDialog("Error al guardar la reserva", "No se pudo guardar la reserva en la base de datos.", e);
+            }
         }
+    }
+
+    private boolean isInputValid() {
+        String errorMessage = "";
+
+        if (fechaLlegada.getValue() == null) {
+            errorMessage += "Fecha de llegada no válida!\n";
+        }
+        if (fechaSalida.getValue() == null) {
+            errorMessage += "Fecha de salida no válida!\n";
+        }
+        if (numHabitaciones.getValue() == null || numHabitaciones.getValue() <= 0) {
+            errorMessage += "Número de habitaciones no válido!\n";
+        }
+        if (tipoHabitacion.getValue() == null || tipoHabitacion.getValue().isEmpty()) {
+            errorMessage += "Tipo de habitación no válido!\n";
+        }
+        if (regimen.getValue() == null || regimen.getValue().isEmpty()) {
+            errorMessage += "Régimen de alojamiento no válido!\n";
+        }
+
+        if (errorMessage.isEmpty()) {
+            return true;
+        } else {
+            showErrorDialog("Campos no válidos", "Por favor, corrige los campos no válidos", new Exception(errorMessage));
+            return false;
+        }
+    }
+
+    private void showErrorDialog(String title, String message, Exception e) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(message);
+        alert.setContentText(e.getMessage());
+        alert.showAndWait();
     }
 }

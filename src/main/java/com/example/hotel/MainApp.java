@@ -10,12 +10,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.Persona;
+import model.*;
 import javafx.scene.control.Alert;
-import model.Reserva;
 import model.repository.impl.PersonaRepositoryImpl;
-import model.ExcepcionPersona;
-import model.repository.impl.ReservaRepositoryImpl;
 
 import java.io.IOException;
 
@@ -165,10 +162,18 @@ public class MainApp extends Application {
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
+            ReservaVO reservaVO = ReservaUtil.toReservaVO(reserva);
+
+// Ahora pasamos la reserva convertida al controlador
+
+
             // Obtener el controlador de la ventana y pasarle la reserva
             ReservaDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
-            controller.setReserva(reserva);  // Establecer la reserva (vacía o existente)
+            // Convert ReservaVO to Reserva
+            reserva = ReservaUtil.toReserva(reservaVO);
+            controller.setReserva(reserva);
+// Establecer la reserva (vacía o existente)
 
             // Mostrar la ventana y esperar a que se cierre
             dialogStage.showAndWait();

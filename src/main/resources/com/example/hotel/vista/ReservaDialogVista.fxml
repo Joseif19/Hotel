@@ -52,6 +52,6 @@
         </ComboBox>
 
         <!-- Botón de reserva -->
-        <Button fx:id="btnHacerReserva" layoutX="150" layoutY="300" text="Hacer reserva" />
+        <Button fx:id="btnHacerReserva" layoutX="150" layoutY="300" text="Hacer reserva" onAction="#handleHacerReserva" />
     </children>
 </AnchorPane>

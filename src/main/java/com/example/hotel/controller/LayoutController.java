@@ -1,6 +1,8 @@
 package com.example.hotel.controller;
 
 import com.example.hotel.MainApp;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.cell.PropertyValueFactory;
 import model.*;
 import model.repository.PersonaRepository;
 import model.repository.ReservaRepository;
@@ -25,7 +27,23 @@ public class LayoutController {
 
     @FXML
     private TableView<Reserva> tablaReservas;
+
+
     @FXML
+    private TableColumn<ReservaVO, Integer> colIdReserva;
+    @FXML
+    private TableColumn<ReservaVO, String> colFechaEntrada;
+    @FXML
+    private TableColumn<ReservaVO, String> colFechaSalida;
+    @FXML
+    private TableColumn<ReservaVO, Integer> colNumHabitaciones;
+    @FXML
+    private TableColumn<ReservaVO, String> colTipoHabitacion;
+    @FXML
+    private TableColumn<ReservaVO, Boolean> colFumador;
+    @FXML
+    private TableColumn<ReservaVO, String> colRegimen;
+
 
     private ObservableList<Persona> personaList = FXCollections.observableArrayList();
     private ObservableList<Reserva> reservaList = FXCollections.observableArrayList();
@@ -58,10 +76,15 @@ public class LayoutController {
 
     @FXML
     private void initialize() {
+        // Configuración de columnas de tabla de personas
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().nombreProperty());
         lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().apellidosProperty());
 
+        // Descargar y mostrar personas
         descargarPersonas();
+
+        // Descargar y mostrar reservas
+        descargarReservas();
 
         // Ocultar la sección de reservas al inicio
         contenedorReservas.setVisible(false);
@@ -74,6 +97,8 @@ public class LayoutController {
 
         botonAñadirReserva.setVisible(false);
     }
+
+
 
     public void setPersonaRepository(PersonaRepositoryImpl personaRepository) {
         this.personaRepository = personaRepository;
@@ -155,22 +180,20 @@ public class LayoutController {
     }
 
     @FXML
-    private void handleEditarReserva() {
-        // Obtener la reserva seleccionada de la lista de reservas
-        Reserva reservaSeleccionada = tablaReservas.getSelectionModel().getSelectedItem();
-
-        if (reservaSeleccionada != null) {
-            // Si hay una reserva seleccionada, llamar a la función para editar esa reserva
-            mainApp.showReservaEditDialog(reservaSeleccionada);
+    private void handleEditarReserva() throws ExcepcionReserva {
+        Reserva selectedReserva = tablaReservas.getSelectionModel().getSelectedItem();
+        if (selectedReserva != null) {
+            boolean okClicked = mainApp.showReservaEditDialog(selectedReserva);
+            if (okClicked) {
+                reservaRepository.editReserva(ReservaUtil.toReservaVO(selectedReserva));
+                descargarReservas();
+            }
         } else {
-            // Si no hay ninguna reserva seleccionada, mostrar un mensaje de error
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Advertencia");
-            alert.setHeaderText("No se ha seleccionado ninguna reserva");
-            alert.setContentText("Por favor, selecciona una reserva para editar.");
-            alert.showAndWait();
+            showSelectionWarning();
         }
     }
+
+
 
     @FXML
     private void handleDeleteReserva() throws ExcepcionReserva {
@@ -183,6 +206,7 @@ public class LayoutController {
             showSelectionWarning();
         }
     }
+
 
 
 
@@ -205,10 +229,13 @@ public class LayoutController {
             tablaReservas.setItems(reservaList);
             return reservaList;
         } catch (ExcepcionReserva e) {
-            showErrorDialog("Error al cargar reservas", "No se pudieron cargar las personas desde la base de datos.", e);
+            showErrorDialog("Error al cargar reservas", "No se pudieron cargar las reservas desde la base de datos.", e);
             return FXCollections.emptyObservableList();
         }
     }
+
+
+
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;

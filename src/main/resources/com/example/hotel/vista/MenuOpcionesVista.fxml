@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="800.0" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotel.controller.MenuOpcionesController">
+    <top>
+        <MenuBar styleClass="background" BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="Hotel">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Close" fx:id="closeMenuItem" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Galería">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Delete" fx:id="deleteMenuItem" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Gráfico Ocupación">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" fx:id="aboutMenuItem" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <center>
+        <StackPane fx:id="contentPane" />
+    </center>
+</BorderPane>
+
