@@ -3,23 +3,26 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="871.0" prefWidth="1322.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotel.controller.MenuOpcionesController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="873.0" prefWidth="1322.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotel.controller.MenuOpcionesController">
+    <top>
         <MenuBar styleClass="background" BorderPane.alignment="CENTER">
             <menus>
-                <!-- Menu de Hotel con un MenuItem que dispara la acción -->
-                <Menu mnemonicParsing="false" text="Hotel" fx:id="hotelMenu">
-                    <MenuItem fx:id="hotelMenuItem" text="Hotel Opciones" onAction="#handleHotel" />
+                <Menu mnemonicParsing="false" text="Hotel">
+                    <items>
+                        <MenuItem fx:id="hotelMenuItem" mnemonicParsing="false" text="Ver hotel" onAction="#handleHotel"/>
+                    </items>
                 </Menu>
-
-                <!-- Menu de Galería con un MenuItem que dispara la acción -->
-                <Menu mnemonicParsing="false" text="Galería" fx:id="galeriaMenu">
-                    <MenuItem fx:id="galeriaMenuItem" text="Ver Galería" onAction="#handleGaleria" />
+                <Menu mnemonicParsing="false" text="Galería">
+                    <items>
+                        <MenuItem fx:id="galeriaMenuItem" mnemonicParsing="false" text="Ver galería de imágenes" onAction="#handleGaleria"/>
+                    </items>
                 </Menu>
-
-                <!-- Menu de Gráfico con un MenuItem que dispara la acción -->
-                <Menu mnemonicParsing="false" text="Gráfico" fx:id="graficoMenu">
-                    <MenuItem fx:id="graficoMenuItem" text="Ver Gráfico" onAction="#handleGrafico" />
+                <Menu mnemonicParsing="false" text="Gráfico">
+                    <items>
+                        <MenuItem fx:id="graficoMenuItem" mnemonicParsing="false" text="Ver gráfico de ocupación" onAction="#handleGrafico"/>
+                    </items>
                 </Menu>
             </menus>
         </MenuBar>
-</ScrollPane>
+    </top>
+</BorderPane>

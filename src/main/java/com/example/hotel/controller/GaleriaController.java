@@ -3,31 +3,39 @@ package com.example.hotel.controller;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.TilePane;
 
-import java.io.File;
 import java.util.List;
 
 public class GaleriaController {
 
-    @FXML
-    private TilePane tilePane;
+        @FXML
+        private ImageView imagen1;
 
-    // Método para inicializar la galería.
-    public void cargarGaleria(List<String> rutasImagenes) {
-        tilePane.getChildren().clear(); // Limpia las imágenes previas.
+        @FXML
+        private ImageView imagen2;
 
-        for (String ruta : rutasImagenes) {
-            File archivoImagen = new File(ruta);
-            if (archivoImagen.exists()) {
-                Image imagen = new Image(archivoImagen.toURI().toString());
-                ImageView imageView = new ImageView(imagen);
-                imageView.setFitWidth(100); // Ajusta el tamaño de la miniatura.
-                imageView.setFitHeight(100);
-                imageView.setPreserveRatio(true);
+        @FXML
+        private ImageView imagen3;
 
-                tilePane.getChildren().add(imageView);
+        @FXML
+        private ImageView imagen4;
+
+        @FXML
+        private void initialize() {
+            imagen1.setImage(loadImage("/com/example/hotel/vista/imagenes/habitacion_doble_individual.jpg"));
+            imagen2.setImage(loadImage("/com/example/hotel/vista/imagenes/habitacion_doble.jpg"));
+            imagen3.setImage(loadImage("/com/example/hotel/vista/imagenes/junior_suite.jpg"));
+            imagen4.setImage(loadImage("/com/example/hotel/vista/imagenes/suite.jpeg"));
+
+        }
+
+        private Image loadImage(String resourcePath) {
+            try {
+                return new Image(getClass().getResource(resourcePath).toExternalForm());
+            } catch (NullPointerException e) {
+                System.err.println("No se pudo cargar la imagen: " + resourcePath);
+                return null;
             }
         }
-    }
+
 }

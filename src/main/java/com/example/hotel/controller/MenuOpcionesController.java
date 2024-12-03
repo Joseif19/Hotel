@@ -3,6 +3,7 @@ package com.example.hotel.controller;
 import com.example.hotel.MainApp;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.MenuItem;
@@ -51,13 +52,16 @@ public class MenuOpcionesController {
 
     private void cargarVista(String fxml) {
         try {
-            // Carga el nuevo contenido
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/hotel/vista/"+fxml));
-            Pane nuevaVista = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/hotel/vista/" + fxml));
+            Pane nuevaVista = loader.load(); // Cambia de BorderPane a Pane
 
+            // Obtén el nodo raíz actual (por ejemplo, un BorderPane) y establece la nueva vista en el centro
+            BorderPane rootLayout = (BorderPane) mainApp.getPrimaryStage().getScene().getRoot();
+            rootLayout.setCenter(nuevaVista);
         } catch (IOException e) {
             e.printStackTrace();
             // Manejo de errores al cargar el FXML
         }
     }
+
 }

@@ -1,0 +1,22 @@
+/* Estilo base para las imágenes de la galería */
+.image-gallery {
+    -fx-border-color: #e1df66; /* Color del borde (dorado en este caso) */
+    -fx-border-width: 4; /* Grosor del borde */
+    -fx-border-radius: 15; /* Bordes redondeados */
+    -fx-padding: 10; /* Espaciado interno para que no toque el borde */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 2); /* Efecto de sombra */
+    -fx-transition: all 0.3s ease; /* Suavizar la transición */
+}
+
+/* Efecto al pasar el cursor (hover) */
+.image-gallery:hover {
+    -fx-scale-x: 1.1; /* Escalar horizontalmente */
+    -fx-scale-y: 1.1; /* Escalar verticalmente */
+    -fx-border-color: #FF6347; /* Color del borde en hover (tomato) */
+}
+
+/* Si quieres darle un efecto a las imágenes dentro de un contenedor específico */
+.image-gallery img {
+    -fx-fit-width: 100%; /* Asegura que la imagen no se distorsione */
+    -fx-fit-height: 100%;
+}

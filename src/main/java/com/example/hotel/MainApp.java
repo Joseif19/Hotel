@@ -1,9 +1,6 @@
 package com.example.hotel;
 
-import com.example.hotel.controller.GaleriaController;
-import com.example.hotel.controller.PersonEditDialogController;
-import com.example.hotel.controller.LayoutController;
-import com.example.hotel.controller.ReservaDialogController;
+import com.example.hotel.controller.*;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +14,7 @@ import javafx.scene.control.Alert;
 import model.repository.impl.PersonaRepositoryImpl;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainApp extends Application {
@@ -38,17 +36,32 @@ public class MainApp extends Application {
         return reservaData;
     }
 
+    @Override
+    public void start(Stage primaryStage) throws ExcepcionPersona {
+        this.primaryStage = primaryStage;
+        this.primaryStage.setTitle("Hotel");
+
+        mostrarMenu();
+    }
+
     public void mostrarMenu() {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/com/example/hotel/vista/MenuOpcionesVista.fxml"));
-            menuLayout = loader.load(); // Guardar el layout del menú.
+            BorderPane menuLayout = loader.load();
 
+            // Obtener el controlador
+            MenuOpcionesController controller = loader.getController();
+
+            // Pasar la referencia de MainApp al controlador
+            controller.setMainApp(this);
+
+            // Crear la escena y mostrarla
             Scene scene = new Scene(menuLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
 
-            showPersonOverview(); // Mostrar el contenido en el menú.
+            showPersonOverview();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -56,6 +69,7 @@ public class MainApp extends Application {
             throw new RuntimeException(e);
         }
     }
+
 
     public void showPersonOverview() throws ExcepcionPersona {
         try {
@@ -68,21 +82,15 @@ public class MainApp extends Application {
             controller.setPersonaRepository(repository);
             personData = controller.descargarPersonas();
 
-            // Inyectar el contenido del `personOverview` en el centro del `menuLayout`.
-            menuLayout.setCenter(personOverview);
+            BorderPane rootLayout = (BorderPane) primaryStage.getScene().getRoot();
+            rootLayout.setCenter(personOverview);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    @Override
-    public void start(Stage primaryStage) throws ExcepcionPersona {
-        this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("Hotel");
 
-        mostrarMenu();
-    }
 
     public boolean showPersonEditDialog(Persona persona) {
         try {
@@ -122,25 +130,28 @@ public class MainApp extends Application {
 
     public void mostrarGaleria() {
         try {
+            // Cargar el archivo FXML de la galería
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/com/example/hotel/vista/GaleriaVista.fxml"));
-            AnchorPane galeriaPane = loader.load();
+            loader.setLocation(getClass().getResource("/com/example/hotel/vista/GaleriaVista.fxml"));
 
+            // Cargar la vista de la galería
+            AnchorPane galeriaLayout = loader.load();
+
+            // Obtener el controlador de la vista de la galería
             GaleriaController controller = loader.getController();
-            // Simula rutas de imágenes. Reemplaza con tus propias rutas.
-            List<String> rutasImagenes = List.of(
-                    "src/main/resources/imagenes/habitacion_doble.webp",
-                    "src/main/resources/imagenes/junior_suite.jpg"
-            );
-            controller.cargarGaleria(rutasImagenes);
 
-            // Añade la galería al centro del menú.
-            menuLayout.setCenter(galeriaPane);
+            // Crear la escena con la vista cargada
+            Scene scene = new Scene(galeriaLayout);
+
+            // Mostrar la escena en el escenario principal
+            primaryStage.setScene(scene);
+            primaryStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     public void mostrarHotel() {
     }
