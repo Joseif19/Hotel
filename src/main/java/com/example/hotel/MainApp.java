@@ -1,5 +1,6 @@
 package com.example.hotel;
 
+import com.example.hotel.controller.GaleriaController;
 import com.example.hotel.controller.PersonEditDialogController;
 import com.example.hotel.controller.LayoutController;
 import com.example.hotel.controller.ReservaDialogController;
@@ -9,12 +10,14 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.*;
 import javafx.scene.control.Alert;
 import model.repository.impl.PersonaRepositoryImpl;
 
 import java.io.IOException;
+import java.util.List;
 
 public class MainApp extends Application {
 
@@ -22,6 +25,7 @@ public class MainApp extends Application {
     private ObservableList<Persona> personData = FXCollections.observableArrayList();
     private PersonaRepositoryImpl repository = new PersonaRepositoryImpl();
     private ObservableList<Reserva> reservaData = FXCollections.observableArrayList();
+    private BorderPane menuLayout;
 
     public MainApp() {
     }
@@ -34,6 +38,25 @@ public class MainApp extends Application {
         return reservaData;
     }
 
+    public void mostrarMenu() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/com/example/hotel/vista/MenuOpcionesVista.fxml"));
+            menuLayout = loader.load(); // Guardar el layout del menú.
+
+            Scene scene = new Scene(menuLayout);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+
+            showPersonOverview(); // Mostrar el contenido en el menú.
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ExcepcionPersona e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void showPersonOverview() throws ExcepcionPersona {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -43,12 +66,10 @@ public class MainApp extends Application {
             LayoutController controller = loader.getController();
             controller.setMainApp(this);
             controller.setPersonaRepository(repository);
-            personData=controller.descargarPersonas();
+            personData = controller.descargarPersonas();
 
-
-            Scene escena = new Scene(personOverview);
-            primaryStage.setScene(escena);
-            primaryStage.show();
+            // Inyectar el contenido del `personOverview` en el centro del `menuLayout`.
+            menuLayout.setCenter(personOverview);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -60,7 +81,7 @@ public class MainApp extends Application {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Hotel");
 
-        showPersonOverview();
+        mostrarMenu();
     }
 
     public boolean showPersonEditDialog(Persona persona) {
@@ -98,6 +119,36 @@ public class MainApp extends Application {
             return false;
         }
     }
+
+    public void mostrarGaleria() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/com/example/hotel/vista/GaleriaVista.fxml"));
+            AnchorPane galeriaPane = loader.load();
+
+            GaleriaController controller = loader.getController();
+            // Simula rutas de imágenes. Reemplaza con tus propias rutas.
+            List<String> rutasImagenes = List.of(
+                    "src/main/resources/imagenes/habitacion_doble.webp",
+                    "src/main/resources/imagenes/junior_suite.jpg"
+            );
+            controller.cargarGaleria(rutasImagenes);
+
+            // Añade la galería al centro del menú.
+            menuLayout.setCenter(galeriaPane);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void mostrarHotel() {
+    }
+
+    public void mostrarGrafico(){
+
+    }
+
 
 
 //    public boolean showReservaEditDialog(Reserva reserva) {
@@ -198,4 +249,6 @@ public class MainApp extends Application {
     public Stage getPrimaryStage() {return primaryStage;}
 
     public static void main(String[] args) {launch(args);}
+
+
 }

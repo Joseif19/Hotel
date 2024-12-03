@@ -1,5 +1,6 @@
 package com.example.hotel.controller;
 
+import com.example.hotel.MainApp;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
@@ -10,34 +11,49 @@ import java.io.IOException;
 public class MenuOpcionesController {
 
     @FXML
-    private StackPane contentPane;
+    private MenuItem hotelMenuItem;
 
     @FXML
-    private MenuItem closeMenuItem;
+    private MenuItem galeriaMenuItem;
 
     @FXML
-    private MenuItem deleteMenuItem;
+    private MenuItem graficoMenuItem;
+
+    private MainApp mainApp;
+
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
+    }
+
 
     @FXML
-    private MenuItem aboutMenuItem;
+    private void handleGaleria() {
+        mainApp.mostrarGaleria();
+    }
+
+    @FXML
+    private void handleHotel() {
+        mainApp.mostrarHotel();
+    }
+
+    @FXML
+    private void handleGrafico() {
+        mainApp.mostrarGrafico();
+    }
 
     @FXML
     public void initialize() {
         // Maneja eventos de los menús
-        closeMenuItem.setOnAction(e -> cargarVista("CloseVista.fxml"));
-        deleteMenuItem.setOnAction(e -> cargarVista("DeleteVista.fxml"));
-        aboutMenuItem.setOnAction(e -> cargarVista("AboutVista.fxml"));
+        hotelMenuItem.setOnAction(e -> cargarVista("LayoutVista.fxml"));
+        galeriaMenuItem.setOnAction(e -> cargarVista("GaleriaVista.fxml"));
+        graficoMenuItem.setOnAction(e -> cargarVista("GraficoVista.fxml"));
     }
 
     private void cargarVista(String fxml) {
         try {
             // Carga el nuevo contenido
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/hotel/view/" + fxml));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/hotel/vista/"+fxml));
             Pane nuevaVista = loader.load();
-
-            // Vacía el contenedor y añade el nuevo contenido
-            contentPane.getChildren().clear();
-            contentPane.getChildren().add(nuevaVista);
 
         } catch (IOException e) {
             e.printStackTrace();
